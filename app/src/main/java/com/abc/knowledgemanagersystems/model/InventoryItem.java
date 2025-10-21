@@ -38,17 +38,17 @@ import lombok.Setter;
 public class InventoryItem {
     @PrimaryKey
     @NotNull
-    @ColumnInfo(name = "inventory_id")
-    private UUID id;
+    @ColumnInfo(name = "inventory_item_id")
+    private int id;
     private String name;
     private String fomula;
     private double units;
     private double quantity;
     private String location;
-    private LocalDate expiredDate;
+    private String expiredDate;
     @ColumnInfo(name = "users_id")
-    private UUID user_owner_id;
+    private int userId;
     @ColumnInfo(name = "sops_id")
-    private UUID sopId;
+    private int sopId;
 
 }

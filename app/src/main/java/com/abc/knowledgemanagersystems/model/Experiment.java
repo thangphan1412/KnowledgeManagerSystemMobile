@@ -41,12 +41,12 @@ public class Experiment {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "experiment_id")
-    private UUID id;
+    private int id;
     private String title;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     @ColumnInfo(name = "users_id")
-    private UUID userId;
+    private int userId;
     @ColumnInfo(name = "sops_id")
-    private UUID sopId;
+    private int sopId;
 }

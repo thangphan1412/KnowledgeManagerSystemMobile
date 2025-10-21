@@ -39,11 +39,11 @@ public class InventoryLogs {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "inventory_log_id")
-    private UUID id;
+    private int id;
     private String description;
-    private LocalDate date;
+    private String date;
     @ColumnInfo(name = "users_id")
-    private UUID userID;
+    private int userID;
     @ColumnInfo(name = "inventorys_item_id")
-    private UUID inventoryItemId;
+    private int inventoryItemId;
 }

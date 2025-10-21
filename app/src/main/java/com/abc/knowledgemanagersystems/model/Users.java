@@ -22,12 +22,13 @@ public class Users {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name="user_id")
-    private UUID id;
+    private int id;
     private String email;
     private String password;
     private String address;
     private String numberphone;
     private String username;
+    private RoleName roleName;
 
 
 }

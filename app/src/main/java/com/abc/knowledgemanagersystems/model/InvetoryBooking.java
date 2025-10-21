@@ -41,12 +41,12 @@ public class InvetoryBooking {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "inventory_booking_id")
-    private UUID id;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private int id;
+    private String startDate;
+    private String endDate;
     @ColumnInfo(name = "users_id")
-    private UUID userId;
+    private int userId;
     @ColumnInfo(name = "inventorys_item_id")
-    private UUID inventoryItemId;
+    private int inventoryItemId;
 
 }

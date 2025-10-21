@@ -43,12 +43,12 @@ public class ExperimentLogs {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "experiment_log_id")
-    private UUID id;
+    private int id;
     private String result;
-    private LocalDate logDate;
+    private String logDate;
     @ColumnInfo(name = "users_id")
-    private UUID user_owner_id;
+    private int user_owner_id;
     @ColumnInfo(name = "experiments_id")
-    private UUID experimentId;
+    private int experimentId;
 
 }

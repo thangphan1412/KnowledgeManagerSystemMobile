@@ -14,10 +14,12 @@ public class MyApplication extends Application {
         database = Room.databaseBuilder(
                         getApplicationContext(),
                         AppDataBase.class,
-                        "manager_knowleage_system"
+                        "manager_knowleage_system.db"
                 )
                 .fallbackToDestructiveMigration()
                 .build();
+        database.getOpenHelper().getWritableDatabase();
+
     }
 
     public static AppDataBase getDatabase() {

@@ -23,8 +23,8 @@ import lombok.Setter;
     foreignKeys = {
         @ForeignKey(
                     entity = ExperimentLogs.class,
-                    parentColumns = "experiment_id",
-                    childColumns = "experiments_id",
+                    parentColumns = "experiment_log_id",
+                    childColumns = "experiments_log_id",
                     onDelete = ForeignKey.CASCADE
             )
     }
@@ -32,14 +32,14 @@ import lombok.Setter;
 public class Sops {
     @PrimaryKey
     @NotNull
-    @ColumnInfo
-    private UUID id;
+    @ColumnInfo(name = "sop_id")
+    private int id;
     private String title;
     private String description;
-    private LocalDate createAt;
+    private String createAt;
     private String filePath;
     private String safeDataSheet;
-    @ColumnInfo(name ="experiments_id" )
-    private UUID experimentId;
+    @ColumnInfo(name ="experiments_log_id" )
+    private int experimentId;
 
 }

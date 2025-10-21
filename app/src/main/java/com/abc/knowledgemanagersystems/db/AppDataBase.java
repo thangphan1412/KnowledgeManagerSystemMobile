@@ -1,8 +1,10 @@
 package com.abc.knowledgemanagersystems.db;
 
 import androidx.room.Database;
+import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.abc.knowledgemanagersystems.config.DataConverter;
 import com.abc.knowledgemanagersystems.dao.EquipmentDao;
 import com.abc.knowledgemanagersystems.dao.ExperimentDao;
 import com.abc.knowledgemanagersystems.dao.ExperimentLogsDao;
@@ -31,8 +33,8 @@ import com.abc.knowledgemanagersystems.model.Users;
         Users.class
     }, version = 1
 )
-@TypeConverters()
-public abstract class AppDataBase extends DoomDatabase {
+@TypeConverters({DataConverter.class})
+public abstract class AppDataBase extends RoomDatabase {
 //    public abs
     public abstract EquipmentDao equipmentDao();
     public abstract ExperimentDao experimentDao();

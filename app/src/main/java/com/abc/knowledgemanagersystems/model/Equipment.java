@@ -31,15 +31,15 @@ public class Equipment {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "equipment_id")
-    private UUID id;
+    private int id;
     private String name;
     private double quantity;
     private String formula;
     private String model;
     private String serial_number;
     @ColumnInfo(name = "users_id")
-    private UUID userId;
+    private int userId;
     @ColumnInfo(name = "inventorys_item_id")
-    private UUID inventoryItemId;
+    private int inventoryItemId;
 
 }
