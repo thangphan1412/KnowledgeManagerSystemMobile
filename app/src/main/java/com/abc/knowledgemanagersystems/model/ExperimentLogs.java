@@ -23,22 +23,32 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(tableName = "experiments_logs",
-        foreignKeys = @ForeignKey(
-                entity = Users.class,
-                parentColumns = "user_id",
-                childColumns = "user_owner_id",
+        foreignKeys = {
+        @ForeignKey(
+                        entity = Users.class,
+                        parentColumns = "user_id",
+                        childColumns = "users_id",
+                        onDelete = ForeignKey.CASCADE
+                ),
+        @ForeignKey(
+                    entity = Experiment.class,
+                parentColumns = "experiment_id",
+                childColumns = "experiments_id",
                 onDelete = ForeignKey.CASCADE
         )
+
+        }
 )
 public class ExperimentLogs {
     @PrimaryKey
     @NotNull
     @ColumnInfo(name = "experiment_log_id")
     private UUID id;
-    private String title;
-    private LocalDate startDate;
-    private LocalDate endDate;
-
+    private String result;
+    private LocalDate logDate;
+    @ColumnInfo(name = "users_id")
     private UUID user_owner_id;
+    @ColumnInfo(name = "experiments_id")
+    private UUID experimentId;
 
 }

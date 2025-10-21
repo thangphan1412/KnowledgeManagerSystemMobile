@@ -2,6 +2,7 @@ package com.abc.knowledgemanagersystems.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +19,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(tableName = "sops")
+@Entity(tableName = "sops",
+    foreignKeys = {
+        @ForeignKey(
+                    entity = ExperimentLogs.class,
+                    parentColumns = "experiment_id",
+                    childColumns = "experiments_id",
+                    onDelete = ForeignKey.CASCADE
+            )
+    }
+)
 public class Sops {
     @PrimaryKey
     @NotNull
@@ -29,5 +39,7 @@ public class Sops {
     private LocalDate createAt;
     private String filePath;
     private String safeDataSheet;
+    @ColumnInfo(name ="experiments_id" )
+    private UUID experimentId;
 
 }

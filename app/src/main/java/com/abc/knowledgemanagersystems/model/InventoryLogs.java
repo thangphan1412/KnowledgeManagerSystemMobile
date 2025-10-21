@@ -20,12 +20,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(tableName = "inventory_logs",
-        foreignKeys = @ForeignKey(
-                entity = Users.class,
-                parentColumns = "user_id",
-                childColumns = "user_owner_id",
+        foreignKeys = {
+        @ForeignKey(
+                        entity = Users.class,
+                        parentColumns = "user_id",
+                        childColumns = "users_id",
+                        onDelete = ForeignKey.CASCADE
+                ),
+        @ForeignKey(
+                entity = InventoryItem.class,
+                parentColumns = "inventory_item_id",
+                childColumns = "inventorys_item_id",
                 onDelete = ForeignKey.CASCADE
         )
+        }
 )
 public class InventoryLogs {
     @PrimaryKey
@@ -34,6 +42,8 @@ public class InventoryLogs {
     private UUID id;
     private String description;
     private LocalDate date;
-
-    private UUID user_owner_id;
+    @ColumnInfo(name = "users_id")
+    private UUID userID;
+    @ColumnInfo(name = "inventorys_item_id")
+    private UUID inventoryItemId;
 }

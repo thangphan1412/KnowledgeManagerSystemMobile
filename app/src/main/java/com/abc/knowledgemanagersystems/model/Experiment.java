@@ -15,11 +15,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(tableName = "inventory_item",
+@Entity(tableName = "experiment",
         foreignKeys = {
         @ForeignKey(
                         entity = Users.class,
@@ -27,28 +27,26 @@ import lombok.Setter;
                         childColumns = "users_id",
                         onDelete = ForeignKey.CASCADE
                 ),
-         @ForeignKey(
-                 entity = Sops.class,
-                 parentColumns = "sop_id",
-                 childColumns = "sops_id",
-                 onDelete = ForeignKey.CASCADE
-         )
+                @ForeignKey(
+                        entity = Sops.class,
+                        parentColumns = "sop_id",
+                        childColumns = "sops_id",
+                        onDelete = ForeignKey.CASCADE
+
+                )
         }
+
 )
-public class InventoryItem {
+public class Experiment {
     @PrimaryKey
     @NotNull
-    @ColumnInfo(name = "inventory_id")
+    @ColumnInfo(name = "experiment_id")
     private UUID id;
-    private String name;
-    private String fomula;
-    private double units;
-    private double quantity;
-    private String location;
-    private LocalDate expiredDate;
+    private String title;
+    private LocalDate startDate;
+    private LocalDate endDate;
     @ColumnInfo(name = "users_id")
-    private UUID user_owner_id;
+    private UUID userId;
     @ColumnInfo(name = "sops_id")
     private UUID sopId;
-
 }

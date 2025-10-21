@@ -47,10 +47,17 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")
 
-    // 🧩 Room
-    val roomVersion = "2.6.1"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    dependencies {
+        val room_version = "2.6.1" // hoặc bản mới nhất
+
+        implementation("androidx.room:room-runtime:$room_version")
+        annotationProcessor("androidx.room:room-compiler:$room_version")
+
+
+        // Nếu muốn dùng RxJava hoặc Flow
+        implementation("androidx.room:room-ktx:$room_version")
+    }
+
 
 
 }
