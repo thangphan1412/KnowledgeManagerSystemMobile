@@ -1,7 +1,6 @@
 package com.abc.knowledgemanagersystems.db;
 
 import android.app.Application;
-
 import androidx.room.Room;
 
 public class MyApplication extends Application {
@@ -18,8 +17,9 @@ public class MyApplication extends Application {
                 )
                 .fallbackToDestructiveMigration()
                 .build();
-        database.getOpenHelper().getWritableDatabase();
 
+
+        database.getOpenHelper().getWritableDatabase();
     }
 
     public static AppDataBase getDatabase() {
