@@ -1,4 +1,4 @@
-package com.abc.knowledgemanagersystems.model;
+package com.abc.knowledgemanagersystems.status;
 
 public enum StatusInventoryItem {
     Available,

@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import org.jetbrains.annotations.NotNull;
+import com.abc.knowledgemanagersystems.status.RoleName;
 
-import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

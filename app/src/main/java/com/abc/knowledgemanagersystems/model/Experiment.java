@@ -5,10 +5,9 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import org.jetbrains.annotations.NotNull;
+import com.abc.knowledgemanagersystems.status.StatusExperiment;
 
-import java.time.LocalDate;
-import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
