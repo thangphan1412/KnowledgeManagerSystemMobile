@@ -42,10 +42,11 @@ public class InventoryItem {
     private int id;
     private String name;
     private String fomula;
-    private double units;
+    private String units;
     private double quantity;
     private String location;
     private String expiredDate;
+    private StatusInventoryItem statusInventoryItem;
     @ColumnInfo(name = "users_id")
     private int userId;
     @ColumnInfo(name = "sops_id")

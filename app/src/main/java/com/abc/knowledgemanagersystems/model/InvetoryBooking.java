@@ -44,6 +44,7 @@ public class InvetoryBooking {
     private int id;
     private String startDate;
     private String endDate;
+    private StatusInventoryItem status;
     @ColumnInfo(name = "users_id")
     private int userId;
     @ColumnInfo(name = "inventorys_item_id")

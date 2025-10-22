@@ -45,6 +45,7 @@ public class Experiment {
     private String title;
     private String startDate;
     private String endDate;
+    private StatusExperiment statusExperiment;
     @ColumnInfo(name = "users_id")
     private int userId;
     @ColumnInfo(name = "sops_id")
