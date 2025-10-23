@@ -4,7 +4,7 @@ import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import com.abc.knowledgemanagersystems.model.InventoryItem;
-import com.abc.knowledgemanagersystems.model.InvetoryBooking;
+import com.abc.knowledgemanagersystems.model.Booking;
 import com.abc.knowledgemanagersystems.model.Sops;
 
 import java.util.List;

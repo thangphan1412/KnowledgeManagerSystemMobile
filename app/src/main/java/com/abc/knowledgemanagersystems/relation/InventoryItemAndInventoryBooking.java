@@ -5,7 +5,7 @@ import androidx.room.Relation;
 
 import com.abc.knowledgemanagersystems.model.ExperimentLogs;
 import com.abc.knowledgemanagersystems.model.InventoryItem;
-import com.abc.knowledgemanagersystems.model.InvetoryBooking;
+import com.abc.knowledgemanagersystems.model.Booking;
 import com.abc.knowledgemanagersystems.model.Users;
 
 import java.util.List;
@@ -17,5 +17,5 @@ public class InventoryItemAndInventoryBooking {
             parentColumn = "inventory_item_id",
             entityColumn = "inventorys_item_id"
     )
-    public List<InvetoryBooking> invetoryBookings;
+    public List<Booking> invetoryBookings;
 }
