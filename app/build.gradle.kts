@@ -41,6 +41,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.play.services.ads)
+    implementation(libs.play.services.maps)
+    implementation(libs.gridlayout)
+    implementation(libs.recyclerview)
     val room_version = "2.6.1"
 
     implementation(libs.appcompat)

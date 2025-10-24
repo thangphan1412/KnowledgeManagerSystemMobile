@@ -13,12 +13,12 @@ import com.abc.knowledgemanagersystems.dao.InventoryItemDao;
 import com.abc.knowledgemanagersystems.dao.InventoryLogDao;
 import com.abc.knowledgemanagersystems.dao.SopsDao;
 import com.abc.knowledgemanagersystems.dao.UserDao;
+import com.abc.knowledgemanagersystems.model.Booking;
 import com.abc.knowledgemanagersystems.model.Equipment;
 import com.abc.knowledgemanagersystems.model.Experiment;
 import com.abc.knowledgemanagersystems.model.ExperimentLogs;
 import com.abc.knowledgemanagersystems.model.InventoryItem;
 import com.abc.knowledgemanagersystems.model.InventoryLogs;
-import com.abc.knowledgemanagersystems.model.InvetoryBooking;
 import com.abc.knowledgemanagersystems.model.Sops;
 import com.abc.knowledgemanagersystems.model.Users;
 
@@ -28,7 +28,7 @@ import com.abc.knowledgemanagersystems.model.Users;
         ExperimentLogs.class,
         InventoryItem.class,
         InventoryLogs.class,
-        InvetoryBooking.class,
+        Booking.class,
         Sops.class,
         Users.class
     }, version = 1

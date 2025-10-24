@@ -13,15 +13,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KnowledgeManagerSystems">
 
+        <!-- ✅ Vô hiệu hóa Google Ads để tránh lỗi Missing App ID -->
+        <provider
+            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
+            android:authorities="${applicationId}.com.google.android.gms.ads.MobileAdsInitProvider"
+            android:enabled="false"
+            android:exported="false"
+            tools:replace="android:authorities" />
+
+<!--        <activity-->
+<!--            android:name=".HomeActivity"-->
+<!--            android:exported="true"-->
+<!--            />-->
+
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

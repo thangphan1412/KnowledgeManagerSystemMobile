@@ -3,18 +3,18 @@ package com.abc.knowledgemanagersystems.relation;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import com.abc.knowledgemanagersystems.model.ExperimentLogs;
 import com.abc.knowledgemanagersystems.model.Booking;
 import com.abc.knowledgemanagersystems.model.Users;
 
 import java.util.List;
 
-public class UserAndInvetoryBooking {
+public class UserWithBookings {
     @Embedded
-    public Users users;
+    public Users user;
+
     @Relation(
-            parentColumn = "user_id",
+            parentColumn = "user_id", // Khóa chính của Users
             entityColumn = "users_id"
     )
-    public List<Booking> invetoryBookings;
+    public List<Booking> bookings;
 }

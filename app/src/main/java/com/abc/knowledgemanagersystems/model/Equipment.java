@@ -34,6 +34,7 @@ public class Equipment {
     private int id;
     private String name;
     private double quantity;
+    private String formula;
     private String model;
     private String serial_number;
     @ColumnInfo(name = "users_id")
