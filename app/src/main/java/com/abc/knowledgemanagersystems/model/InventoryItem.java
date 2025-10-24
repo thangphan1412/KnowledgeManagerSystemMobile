@@ -40,7 +40,7 @@ public class InventoryItem {
     @ColumnInfo(name = "inventory_item_id")
     private int id;
     private String name;
-    private String fomula;
+    private String formula;
     private String units;
     private double quantity;
     private String location;
