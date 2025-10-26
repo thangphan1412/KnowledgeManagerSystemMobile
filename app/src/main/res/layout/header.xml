@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <!-- Bạn có thể thêm ImageView (logo) hoặc TextView (tên người dùng) ở đây -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
