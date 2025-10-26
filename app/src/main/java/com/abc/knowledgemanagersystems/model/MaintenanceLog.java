@@ -29,7 +29,7 @@ import lombok.Setter;
 )
 public class MaintenanceLog {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name = "log_id")
     private int id;

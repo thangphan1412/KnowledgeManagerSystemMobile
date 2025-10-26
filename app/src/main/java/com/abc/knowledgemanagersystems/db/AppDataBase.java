@@ -1,6 +1,9 @@
 package com.abc.knowledgemanagersystems.db;
 
+import android.content.Context;
+
 import androidx.room.Database;
+import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
@@ -44,4 +47,18 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract InventoryBookingDao inventoryBookingDao();
     public abstract SopsDao sopsDao();
     public abstract UserDao userDao();
+    private static volatile AppDataBase INSTANCE;
+
+    public static AppDataBase getInstance(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDataBase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                    AppDataBase.class, "lab_management_db")
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 }

@@ -42,7 +42,7 @@ import lombok.Setter;
 
 public class Booking {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name = "booking_id")
     private int id;

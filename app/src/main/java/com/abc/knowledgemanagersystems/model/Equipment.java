@@ -28,7 +28,7 @@ import lombok.Setter;
         )
 )
 public class Equipment {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name = "equipment_id")
     private int id;

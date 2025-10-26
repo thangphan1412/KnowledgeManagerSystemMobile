@@ -37,7 +37,7 @@ import lombok.Setter;
 
 )
 public class Experiment {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name = "experiment_id")
     private int id;
@@ -49,4 +49,8 @@ public class Experiment {
     private int userId;
     @ColumnInfo(name = "sops_id")
     private int sopId;
+
+    public String serverExperimentId;
+    public boolean isSynced;
+
 }

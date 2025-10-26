@@ -35,7 +35,7 @@ import lombok.Setter;
         }
 )
 public class InventoryItem {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name = "inventory_item_id")
     private int id;

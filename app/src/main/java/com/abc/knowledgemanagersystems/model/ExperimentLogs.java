@@ -40,7 +40,7 @@ import lombok.Setter;
         }
 )
 public class ExperimentLogs {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name = "experiment_log_id")
     private int id;

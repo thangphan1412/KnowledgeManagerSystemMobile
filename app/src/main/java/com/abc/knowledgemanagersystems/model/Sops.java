@@ -30,10 +30,11 @@ import lombok.Setter;
     }
 )
 public class Sops {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name = "sop_id")
     private int id;
+    private String sopsName;
     private String title;
     private String description;
     private String createAt;

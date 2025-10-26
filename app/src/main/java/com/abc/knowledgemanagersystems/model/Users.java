@@ -19,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(tableName= "users")
 public class Users {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     @ColumnInfo(name="user_id")
     private int id;
