@@ -12,15 +12,11 @@
     tools:context=".HomeActivity"
     tools:openDrawer="end">
 
-    <!--
-      PHẦN 1: GIAO DIỆN DASHBOARD CỦA BẠN
-    -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F5F5F5">
 
-        <!-- Toolbar trên cùng -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
@@ -35,8 +31,19 @@
             app:title="Dashboard"
             app:titleTextColor="@android:color/white" />
 
-        <!-- ScrollView để chứa các thẻ (cards) -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#E09B9B"
+            app:menu="@menu/bottom_nav_manu"
+            app:labelVisibilityMode="labeled" />
+
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,30 +51,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-            <!-- LinearLayout để xếp các thẻ theo chiều dọc -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Thẻ: My ongoing experiment -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="My ongoing experiment"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     app:cardBackgroundColor="#E09B9B"
                     app:cardCornerRadius="12dp"
-                    app:contentPadding="16dp"
-                    android:layout_marginBottom="16dp">
+                    app:contentPadding="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -91,29 +97,29 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Thẻ: Inventory Alerts Card -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Inventory Alerts Card"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     app:cardBackgroundColor="#E09B9B"
-                    app:cardCornerRadius="12dp"
-                    android:layout_marginBottom="16dp">
+                    app:cardCornerRadius="12dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <!-- Thẻ con: EXPIRING SOON -->
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -123,10 +129,10 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/baseline_access_time_24"
-                                app:tint="@android:color/white"
+                                android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="16dp"
-                                android:layout_gravity="center_vertical"/>
+                                android:src="@drawable/baseline_access_time_24"
+                                app:tint="@android:color/white" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -138,26 +144,27 @@
                                     android:layout_height="wrap_content"
                                     android:text="EXPIRING SOON"
                                     android:textColor="@android:color/white"
-                                    android:textStyle="bold"
-                                    android:textSize="16sp"/>
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Reagent X (Hết hạn trong 3 ngày)"
                                     android:textColor="@android:color/white"
-                                    android:textSize="14sp"/>
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
 
-                        <!-- Đường kẻ ngang -->
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="#40FFFFFF"
                             android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"/>
+                            android:layout_marginEnd="16dp"
+                            android:background="#40FFFFFF" />
 
-                        <!-- Thẻ con: LOW STOCK -->
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -167,10 +174,10 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/baseline_warning_amber_24"
-                                app:tint="@android:color/white"
+                                android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="16dp"
-                                android:layout_gravity="center_vertical"/>
+                                android:src="@drawable/baseline_warning_amber_24"
+                                app:tint="@android:color/white" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -182,14 +189,15 @@
                                     android:layout_height="wrap_content"
                                     android:text="LOW STOCK"
                                     android:textColor="@android:color/white"
-                                    android:textStyle="bold"
-                                    android:textSize="16sp"/>
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Ethanol (còn 100ml)"
                                     android:textColor="@android:color/white"
-                                    android:textSize="14sp"/>
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -202,9 +210,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--
-      PHẦN 2: NGĂN ĐIỀU HƯỚNG (MENU)
-    -->
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
