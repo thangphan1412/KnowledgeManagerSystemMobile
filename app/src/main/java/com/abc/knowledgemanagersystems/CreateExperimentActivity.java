@@ -12,6 +12,7 @@ import com.abc.knowledgemanagersystems.databinding.ActivityCreateExperimentBindi
 import com.abc.knowledgemanagersystems.model.Experiment;
 import com.abc.knowledgemanagersystems.model.Sops;
 import com.abc.knowledgemanagersystems.repository.ExperimentRepository;
+import com.abc.knowledgemanagersystems.service.ExperimentService;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,13 +24,12 @@ import java.util.concurrent.Executors;
 public class CreateExperimentActivity extends AppCompatActivity {
     private ActivityCreateExperimentBinding binding;
     private Calendar calendar;
-    private ExperimentRepository repository;
+    private ExperimentService experimentService;
     private ExecutorService executorService;
     private List<Sops> availableSops;
-    private long selectedSopId = -1;
+    private int selectedSopId = -1;
 
-
-    private static final long CURRENT_USER_ID = 1;
+    private static final int CURRENT_USER_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,12 @@ public class CreateExperimentActivity extends AppCompatActivity {
         binding = ActivityCreateExperimentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = new ExperimentRepository(this);
-        calendar = Calendar.getInstance();
 
+        ExperimentRepository repository = new ExperimentRepository(this);
+
+        experimentService = new ExperimentService(repository);
+
+        calendar = Calendar.getInstance();
         executorService = Executors.newSingleThreadExecutor();
 
         binding.editTextStartDate.setOnClickListener(v -> showDatePickerDialog());
@@ -49,10 +52,11 @@ public class CreateExperimentActivity extends AppCompatActivity {
         loadSops();
     }
 
+
     private void loadSops() {
         executorService.execute(() -> {
             try {
-                availableSops = repository.getAllSops();
+                availableSops = experimentService.getAvailableSops();
                 runOnUiThread(() -> setupProtocolAutoComplete(availableSops));
             } catch (Exception e) {
                 runOnUiThread(() -> Toast.makeText(this, "Không thể tải danh sách Protocol.", Toast.LENGTH_SHORT).show());
@@ -66,11 +70,7 @@ public class CreateExperimentActivity extends AppCompatActivity {
             sopNames[i] = sopsList.get(i).getSopsName();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_dropdown_item_1line,
-                sopNames
-        );
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sopNames);
         binding.autoCompleteProtocol.setAdapter(adapter);
 
         binding.autoCompleteProtocol.setOnItemClickListener((parent, view, position, id) -> {
@@ -109,22 +109,22 @@ public class CreateExperimentActivity extends AppCompatActivity {
 
 
     private void createExperimentRecord() {
-        String title = binding.editTextExperimentTitle.getText().toString().trim();
-        String objective = binding.editTextHypothesisObjective.getText().toString().trim();
+        String name = binding.editTextExperimentTitle.getText().toString().trim();
+        String title = binding.editTextHypothesisObjective.getText().toString().trim();
         String startDate = binding.editTextStartDate.getText().toString();
 
-        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(objective) || TextUtils.isEmpty(startDate) || selectedSopId == -1) {
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(title) || TextUtils.isEmpty(startDate) || selectedSopId == -1) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin và chọn Protocol.", Toast.LENGTH_LONG).show();
             return;
         }
 
-
         Experiment newExperiment = new Experiment();
-
 
         executorService.execute(() -> {
             try {
-                long localId = repository.createAndSyncExperiment(newExperiment);
+
+                long localId = experimentService.createAndSyncNewExperiment(newExperiment);
+
                 runOnUiThread(() -> {
                     Toast.makeText(this, "Tạo bản ghi thành công (ID cục bộ: " + localId + ")", Toast.LENGTH_LONG).show();
                     finish();
@@ -140,6 +140,9 @@ public class CreateExperimentActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        executorService.shutdown();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
     }
+
 }

@@ -19,22 +19,18 @@ public class ExperimentRepository {
         this.experimentDao = db.experimentDao();
         this.sopsDao = db.sopsDao();
     }
-    public List<Sops> getAllSops() {
 
-        return sopsDao.getAllSops();
+
+    public long insertExperimentLocal(Experiment experiment) {
+        return experimentDao.insert(experiment);
     }
 
 
-    public long createAndSyncExperiment(Experiment experiment) {
+    public List<Sops> getAllSops() {
+        return sopsDao.getAllSops();
+    }
 
-        long localId = experimentDao.insert(experiment);
-
-
-        String serverId = "EXP-SVR-" + localId;
-
-        experiment.serverExperimentId = serverId;
-        experiment.isSynced = true;
-
-        return localId;
+    public void updateSyncStatus(int localId, String serverId) {
+        experimentDao.updateServerInfo(localId, serverId);
     }
 }
