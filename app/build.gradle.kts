@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
 
-    id("org.jetbrains.kotlin.android") version "1.9.24"
+
 
 
 }
@@ -36,9 +36,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
 
 
 }
@@ -64,8 +62,6 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 
-    // Kotlin metadata fix
-    implementation("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
 
     // Unit test
     testImplementation(libs.junit)
