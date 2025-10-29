@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
+    <!-- Tôi đoán menu của bạn cũng có các mục tương tự -->
     <group android:checkableBehavior="single">
-
         <item
             android:id="@+id/nav_home"
-            android:title="Trang chủ" />
+            android:icon="@drawable/baseline_home_24"
+            android:title="Home" />
+
+        <!-- NÚT BẠN CẦN ĐÂY -->
+        <item
+            android:id="@+id/nav_equipment"
+            android:icon="@drawable/baseline_equipment_24"
+            android:title="Equipment" />
 
         <item
-            android:id="@+id/nav_profile"
-
-            android:title="Hồ sơ" />
-
-        <item
-            android:id="@+id/nav_settings"
-
-            android:title="Cài đặt" />
+            android:id="@+id/nav_inventory"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Inventory" />
 
         <item
-            android:id="@+id/nav_logout"
+            android:id="@+id/nav_experiment"
+            android:icon="@drawable/baseline_equipment_24"
+            android:title="Experiment" />
 
-            android:title="Đăng xuất" />
-
+        <item
+            android:id="@+id/nav_sops"
+            android:icon="@drawable/baseline_equipment_24"
+            android:title="SOPs" />
     </group>
-
 </menu>

@@ -3,18 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:id="@+id/drawer_layout"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".HomeActivity"
     tools:openDrawer="end">
 
-
     <include layout="@layout/layout_homepage" />
-
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
@@ -25,4 +21,3 @@
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-

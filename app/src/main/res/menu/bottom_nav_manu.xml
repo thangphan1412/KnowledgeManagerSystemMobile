@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
+        android:id="@+id/navigation_home"
         android:icon="@drawable/baseline_home_24"
         android:title="Home" />
+
     <item
+        android:id="@+id/navigation_equipment"
         android:icon="@drawable/baseline_equipment_24"
-        android:title="Equipmetn" />
+        android:title="Equipment" />
+
     <item
+        android:id="@+id/navigation_inventory"
         android:icon="@drawable/baseline_home_24"
-        android:title="Iventory" />
+        android:title="Inventory" />
+
     <item
+        android:id="@+id/navigation_experiment"
         android:icon="@drawable/baseline_equipment_24"
         android:title="Experiment" />
+
     <item
+        android:id="@+id/navigation_sops"
         android:icon="@drawable/baseline_equipment_24"
-        android:title="SOP" />
+        android:title="SOPs" />
 </menu>
