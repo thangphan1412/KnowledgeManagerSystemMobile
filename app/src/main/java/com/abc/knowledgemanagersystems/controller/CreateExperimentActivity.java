@@ -1,4 +1,4 @@
-package com.abc.knowledgemanagersystems;
+package com.abc.knowledgemanagersystems.controller;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;

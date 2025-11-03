@@ -31,6 +31,7 @@ import com.abc.knowledgemanagersystems.model.Users;
         ExperimentLogs.class,
         InventoryItem.class,
         InventoryLogs.class,
+
         Booking.class,
         Sops.class,
         Users.class
