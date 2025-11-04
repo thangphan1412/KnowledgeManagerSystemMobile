@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.EquipmentBookingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_view_booking_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đặt lịch cho thiết bị"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="1. Chọn ngày"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="2. Chọn giờ"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <Button
+            android:id="@+id/button_pick_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn giờ bắt đầu"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
+            android:textColor="#E09B9B"
+            app:strokeColor="#E09B9B" />
+
+        <Button
+            android:id="@+id/button_pick_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn giờ kết thúc"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
+            android:textColor="#E09B9B"
+            app:strokeColor="#E09B9B" />
+
+        <Button
+            android:id="@+id/button_book_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Xác nhận Đặt lịch"
+
+            android:backgroundTint="#E09B9B"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

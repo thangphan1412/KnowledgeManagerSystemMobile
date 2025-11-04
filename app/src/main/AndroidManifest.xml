@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+<<<<<<< Updated upstream
     <uses-permission android:name="android.permission.INTERNET" />
 
+=======
+>>>>>>> Stashed changes
     <application
         android:name=".db.MyApplication"
         android:allowBackup="true"
@@ -29,29 +33,6 @@
             tools:replace="android:authorities" />
 
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EquipmentDetailActivity"
-            android:exported="true"
-            android:label="Chi tiết Thiết bị">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".CreateExperimentActivity"
-            android:exported="false"
-            android:label="Tạo Thí nghiệm" />
-
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="false" />-->
-
-        <activity
             android:name=".controller.LoginController"
             android:exported="true">
             <intent-filter>
@@ -60,12 +41,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< Updated upstream
         <activity
             android:name=".controller.CreateExperimentActivity"
             android:exported="false" />
         <activity
             android:name=".controller.HomeActivity"
             android:exported="false" />
+=======
+
+        <activity
+            android:name=".controller.EquipmentDetailActivity"
+            android:exported="false"
+            android:label="Chi tiết Thiết bị" />
+        <activity
+            android:name=".controller.HomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".controller.CreateExperimentActivity"
+            android:exported="false"
+            android:label="Tạo Thí nghiệm" />
+
+        <activity
+            android:name=".controller.EquipmentBookingActivity"
+            android:exported="false"
+            android:label="Đặt lịch Thiết bị" />
+
+>>>>>>> Stashed changes
     </application>
 
 </manifest>

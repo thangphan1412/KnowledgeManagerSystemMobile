@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EquipmentDetailActivity">
+    tools:context=".controller.EquipmentDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,14 +19,12 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             tools:text="HPLC Machine #2" />
-
         <TextView
             android:id="@+id/text_view_model"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             tools:text="Model: Agilent 1260" />
-
         <TextView
             android:id="@+id/text_view_serial"
             android:layout_width="match_parent"
@@ -34,7 +32,6 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_marginBottom="8dp"
             tools:text="Serial #: US12345678" />
-
         <TextView
             android:id="@+id/text_view_equipment_status"
             android:layout_width="match_parent"
@@ -49,36 +46,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Tải Hướng dẫn (PDF)"
-            app:icon="@drawable/ic_download" />
+            app:icon="@drawable/ic_download"
 
-        <TextView
+            android:backgroundTint="#E09B9B"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_go_to_booking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Đặt lịch"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-        <CalendarView
-            android:id="@+id/calendar_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/button_pick_start_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Chọn giờ bắt đầu"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-        <Button
-            android:id="@+id/button_pick_end_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Chọn giờ kết thúc"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-        <Button
-            android:id="@+id/button_book_now"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Xác nhận Đặt lịch" />
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="Đặt lịch thiết bị này"
+
+            android:textColor="#E09B9B"
+            app:strokeColor="#E09B9B" />
 
         <TextView
             android:layout_width="match_parent"
@@ -86,12 +68,13 @@
             android:layout_marginTop="24dp"
             android:text="Nhật ký Bảo trì và Hiệu chuẩn"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_maintenance_logs"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:nestedScrollingEnabled="false"
             android:background="#EEEEEE"
-            tools:listitem="@layout/item_log" /> </LinearLayout>
+            tools:listitem="@layout/item_log" />
+
+    </LinearLayout>
 </ScrollView>
