@@ -6,11 +6,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
-<<<<<<< Updated upstream
     <uses-permission android:name="android.permission.INTERNET" />
 
-=======
->>>>>>> Stashed changes
+
     <application
         android:name=".db.MyApplication"
         android:allowBackup="true"
@@ -41,34 +39,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< Updated upstream
         <activity
             android:name=".controller.CreateExperimentActivity"
             android:exported="false" />
         <activity
             android:name=".controller.HomeActivity"
             android:exported="false" />
-=======
 
         <activity
             android:name=".controller.EquipmentDetailActivity"
             android:exported="false"
             android:label="Chi tiết Thiết bị" />
-        <activity
-            android:name=".controller.HomeActivity"
-            android:exported="false" />
 
-        <activity
-            android:name=".controller.CreateExperimentActivity"
-            android:exported="false"
-            android:label="Tạo Thí nghiệm" />
+
 
         <activity
             android:name=".controller.EquipmentBookingActivity"
             android:exported="false"
             android:label="Đặt lịch Thiết bị" />
 
->>>>>>> Stashed changes
     </application>
 
 </manifest>

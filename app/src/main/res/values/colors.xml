@@ -2,12 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<<<<<<< Updated upstream
     <color name="pink_500">#E57373</color>
     <color name="pink_100">#F8BBD0</color>
-=======
+
     <color name="colorAppPrimary">#E09B9B</color>
     <color name="colorAppBackground">#F5F5F5</color>
     <color name="colorOnPrimary">#FFFFFF</color>
->>>>>>> Stashed changes
 </resources>
