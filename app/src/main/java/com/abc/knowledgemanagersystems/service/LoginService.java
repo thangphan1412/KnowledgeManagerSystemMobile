@@ -8,7 +8,6 @@ import com.abc.knowledgemanagersystems.config.AuthPreferences;
 import com.abc.knowledgemanagersystems.request.LoginRequest;
 import com.abc.knowledgemanagersystems.response.LoginResponse;
 
-import retrofit2.Response;
 
 public class LoginService {
     private final AuthApi authApi;
