@@ -1,4 +1,5 @@
 package com.abc.knowledgemanagersystems; // Đảm bảo tên package của bạn là chính xác
+package com.abc.knowledgemanagersystems.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.abc.knowledgemanagersystems.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 

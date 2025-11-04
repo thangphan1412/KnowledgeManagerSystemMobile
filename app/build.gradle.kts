@@ -37,7 +37,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-
+    buildFeatures {
+        viewBinding= true //
+        // dataBinding true // Không cần nếu chỉ dùng View Binding
+    }
 
 }
 
@@ -67,4 +70,14 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+// Retrofit (Giao tiếp API)
+    val retrofit_version = "2.9.0" // Dùng 'val' thay cho 'def'
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version") // Dùng hàm implementation() và dấu ngoặc đơn
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+
+// Encrypted SharedPreferences (Lưu trữ an toàn)
+    val security_version = "1.1.0-alpha06" // Dùng 'val'
+    implementation("androidx.security:security-crypto:$security_version")
+
 }
