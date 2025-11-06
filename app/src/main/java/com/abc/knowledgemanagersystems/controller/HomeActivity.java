@@ -84,6 +84,11 @@ public class HomeActivity extends AppCompatActivity {
                     // TODO: MSopsActivity (nếu có)
                     Intent intent = new Intent(HomeActivity.this, ProtocolActivity.class);
                     startActivity(intent);
+                } else if (id == R.id.nav_logout) {
+                    // Xử lý đăng xuất
+                    Intent intent = new Intent(HomeActivity.this, LoginController.class);
+                    startActivity(intent);
+                    finish(); // Đóng HomeActivity
                 }
 
                 // Đóng menu lại sau khi đã xử lý click
