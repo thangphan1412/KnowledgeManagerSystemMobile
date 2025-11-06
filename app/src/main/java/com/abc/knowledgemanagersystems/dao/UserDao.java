@@ -29,6 +29,6 @@ public interface UserDao {
 //    @Query("SELECT * FROM users ORDER BY id DESC")
 //    List<Users> getAll();
 // Thêm 1 user (trả về id đã insert)
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    int insert(Users user);
+//    @Insert(onConflict = OnConflictStrategy.ABORT)
+//    int insert(Users user);
 }

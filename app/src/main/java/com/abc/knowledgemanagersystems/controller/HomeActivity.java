@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Menu; // 📢 Cần Import Menu
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -12,122 +13,207 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-
 import com.abc.knowledgemanagersystems.R;
+import com.abc.knowledgemanagersystems.config.AuthPreferences;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 
 public class HomeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private MaterialToolbar toolbar;
     private NavigationView navigationView;
+    private BottomNavigationView bottomNavigationView;
+    private AuthPreferences authPreferences;
+
+    // Khai báo các Activity đích
+    private static final Class<?> EXPERIMENT_ACTIVITY = CreateExperimentActivity.class;
+    private static final Class<?> HOME_ACTIVITY = HomeActivity.class;
+    private static final Class<?> EQUIPMENT_ACTIVITY = EquipmentListActivity.class;
+//    private static final Class<?> INVENTORY_ACTIVITY = InventoryActivity.class;
+    private static final Class<?> SOPS_ACTIVITY = ProtocolActivity.class;
+    private static final Class<?> LOGIN_ACTIVITY = LoginController.class;
+    private static final Class<?> EQUIPMENT_DETAIL_ACTIVITY = EquipmentDetailActivity.class;
+    private static final Class<?> PROTOCOL_ACTIVITY = ProtocolActivity.class;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // 1. SỬA LỖI CRASH: Nạp đúng file layout chứa DrawerLayout
-        // File activity_main.xml của bạn chứa layout_homepage.xml bên trong nó.
         setContentView(R.layout.activity_main);
 
-        // 2. Ánh xạ các View
+        // 2. Ánh xạ các View và Khởi tạo Auth
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
-
-        // 3. Ánh xạ Toolbar
-        // LƯU Ý: toolbar nằm BÊN TRONG layout_homepage.xml,
-        // nhưng vì layout_homepage đã được <include> vào activity_main,
-        // chúng ta vẫn có thể tìm thấy nó bình thường.
         toolbar = findViewById(R.id.toolbar);
-        // (Hãy chắc chắn ID của toolbar trong layout_homepage.xml là "toolbar")
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        authPreferences = new AuthPreferences(this); // Khởi tạo AuthPreferences
 
-        // 4. Cài đặt Toolbar để mở Menu
-        toolbar.setOnMenuItemClickListener(new MaterialToolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                // Đảm bảo menu của toolbar có 1 item tên 'action_menu'
-                if (item.getItemId() == R.id.action_menu) {
-                    drawerLayout.openDrawer(GravityCompat.END); // Mở menu từ bên phải
-                    return true;
-                }
-                return false;
-            }
-        });
+        // 3. Cài đặt Toolbar
+        setupToolbarMenu();
 
-        // 5. Cài đặt xử lý click cho các item trong Menu (NavigationView)
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
+        // 4. Cài đặt xử lý click cho Navigation Drawer
+        setupDrawerMenu();
 
-                // Kiểm tra xem người dùng bấm vào item nào
-                if (id == R.id.nav_home) {
-                    Toast.makeText(HomeActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
+        // ÁP DỤNG PHÂN QUYỀN (Ẩn/Hiện Menu)
+        applyAuthorization();
 
-                } else if (id == R.id.nav_equipment) {
-                    // Mở màn hình Chi tiết Thiết bị
-                    // (Yêu cầu bạn đã tạo EquipmentDetailActivity.java và khai báo trong Manifest)
-                    Intent intent = new Intent(HomeActivity.this, EquipmentDetailActivity.class);
-                    startActivity(intent);
+        // 5. CÀI ĐẶT XỬ LÝ CLICK CHO BOTTOM NAVIGATION
+        setupBottomNavigationView();
 
-                } else if (id == R.id.nav_inventory) {
-                    Toast.makeText(HomeActivity.this, "Mở Inventory", Toast.LENGTH_SHORT).show();
-                    // TODO: Mở InventoryActivity (nếu có)
-
-                } else if (id == R.id.nav_experiment) {
-                    Toast.makeText(HomeActivity.this, "Mở Experiment", Toast.LENGTH_SHORT).show();
-                    // TODO: Mở CreateExperimentActivity (nếu có)
-
-                } else if (id == R.id.nav_sops) {
-                    //Toast.makeText(HomeActivity.this, "Mở SOPs", Toast.LENGTH_SHORT).show();
-                    // TODO: MSopsActivity (nếu có)
-                    Intent intent = new Intent(HomeActivity.this, ProtocolActivity.class);
-                    startActivity(intent);
-                }
-
-                // Đóng menu lại sau khi đã xử lý click
-                drawerLayout.closeDrawer(GravityCompat.END);
-                return true;
-            }
-        });
-
-        // 6. Xử lý nút Back (Cách mới, tương thích cử chỉ vuốt)
+        // 6. Xử lý nút Back
         setupOnBackPressed();
     }
 
+    // --- CÁC PHƯƠNG THỨC XỬ LÝ CHỨC NĂNG ---
+
     /**
-     * Cài đặt OnBackPressedDispatcher để thay thế cho onBackPressed() đã cũ.
-     * Logic: Khi menu mở, bấm Back sẽ đóng menu. Khi menu đóng, bấm Back sẽ thoát app.
+     * Phương thức MỚI: Áp dụng phân quyền cho cả Drawer và Bottom Nav.
+     */
+    private void applyAuthorization() {
+        // Lấy vai trò của người dùng hiện tại
+        String userRole = authPreferences.getUserRole();
+
+
+        // 1. Phân quyền cho Navigation Drawer (Menu bên hông)
+
+        Menu drawerMenu = navigationView.getMenu();
+
+        // Mặc định ẩn các mục yêu cầu quyền đặc biệt (dựa trên file XML của Drawer)
+        drawerMenu.findItem(R.id.nav_team).setVisible(false);
+        drawerMenu.findItem(R.id.nav_protocols).setVisible(false);
+
+        if (userRole.equals("MANAGER")) {
+            drawerMenu.findItem(R.id.nav_team).setVisible(true);
+            drawerMenu.findItem(R.id.nav_protocols).setVisible(true);
+        }
+
+        // -----------------------------------------------------------------
+        // 2. Phân quyền cho Bottom Navigation View (Thanh footer)
+        // -----------------------------------------------------------------
+        Menu bottomMenu = bottomNavigationView.getMenu();
+
+        // Ví dụ: Giả sử mọi người đều thấy 5 mục. Nếu bạn muốn ẩn 1 mục (ví dụ: SOPs)
+        // đối với vai trò Researcher, bạn sẽ làm như sau:
+        // if (userRole.equals("RESEARCHER")) {
+        //     bottomMenu.findItem(R.id.navigation_sops).setVisible(false);
+        // }
+    }
+
+
+    /**
+     * Xử lý sự kiện khi nhấn vào các mục của BottomNavigationView.
+     */
+    private void setupBottomNavigationView() {
+
+        // Đặt mục Home được chọn mặc định
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.navigation_home) {
+                if (HomeActivity.this.getClass() != HOME_ACTIVITY) {
+                    startActivity(new Intent(HomeActivity.this, HOME_ACTIVITY));
+                }
+                return true;
+            } else if (itemId == R.id.navigation_experiment) {
+                startActivity(new Intent(HomeActivity.this, EXPERIMENT_ACTIVITY));
+                return true;
+            } else if (itemId == R.id.navigation_equipment) {
+                startActivity(new Intent(HomeActivity.this, EQUIPMENT_ACTIVITY));
+                return true;
+//            }
+//            else if (itemId == R.id.navigation_inventory) {
+//                // Giả định có InventoryActivity
+//                startActivity(new Intent(HomeActivity.this, INVENTORY_ACTIVITY));
+//                return true;
+            } else if (itemId == R.id.navigation_sops) {
+                startActivity(new Intent(HomeActivity.this, SOPS_ACTIVITY));
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    /**
+     * Xử lý sự kiện khi nhấn nút Menu trên Toolbar để mở Navigation Drawer.
+     */
+    private void setupToolbarMenu() {
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_menu) {
+                drawerLayout.openDrawer(GravityCompat.END);
+                return true;
+            }
+            return false;
+        });
+    }
+
+    /**
+     * Xử lý sự kiện khi nhấn vào các mục của Navigation Drawer.
+     */
+    private void setupDrawerMenu() {
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.nav_profile) {
+                Toast.makeText(HomeActivity.this, "Mở Profile", Toast.LENGTH_SHORT).show();
+
+            } else if (id == R.id.nav_team) {
+                // Phân quyền đã được xử lý bằng applyAuthorization(), chỉ cần Intent
+                startActivity(new Intent(HomeActivity.this, EQUIPMENT_DETAIL_ACTIVITY));
+
+            } else if (id == R.id.nav_protocols) {
+                Toast.makeText(HomeActivity.this, "Phê duyệt Protocols", Toast.LENGTH_SHORT).show();
+
+            } else if (id == R.id.nav_sds) {
+                Toast.makeText(HomeActivity.this, "Mở SDS Lookup", Toast.LENGTH_SHORT).show();
+
+            } else if (id == R.id.nav_setting) {
+                startActivity(new Intent(HomeActivity.this, PROTOCOL_ACTIVITY));
+            } else if(id == R.id.nav_Logout){
+
+                authPreferences.clearAuthData(); // Xóa Token đã lưu
+                Intent intent = new Intent(HomeActivity.this, LOGIN_ACTIVITY);
+                // Dọn dẹp Activity Stack để người dùng không thể quay lại
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.END);
+            return true;
+        });
+    }
+
+    /**
+     * Xử lý nút Back.
      */
     private void setupOnBackPressed() {
-        // Tạo một Callback mới, ban đầu tắt (false)
         OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(false) {
             @Override
             public void handleOnBackPressed() {
-                // Khi callback này được BẬT, nó chỉ làm 1 việc: đóng menu
+                // Khi menu mở, bấm Back sẽ đóng menu
                 drawerLayout.closeDrawer(GravityCompat.END);
             }
         };
 
-        // Thêm callback vào dispatcher
         getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 
-        // Thêm listener vào DrawerLayout để BẬT/TẮT callback một cách linh động
         drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerOpened(View drawerView) {
-                // Khi menu MỞ, BẬT callback lên
                 onBackPressedCallback.setEnabled(true);
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                // Khi menu ĐÓNG, TẮT callback đi
                 onBackPressedCallback.setEnabled(false);
             }
         });
     }
-
-    // KHÔNG CẦN override onBackPressed() cũ nữa.
 }
