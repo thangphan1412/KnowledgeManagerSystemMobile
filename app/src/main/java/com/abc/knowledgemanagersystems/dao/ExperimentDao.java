@@ -14,4 +14,7 @@ public interface ExperimentDao {
     long insert(Experiment experiment);
     @Query("UPDATE experiment SET serverExperimentId = :serverId, isSynced = 1 WHERE experiment_id = :localId")
     void updateServerInfo(int localId, String serverId);
+
+    @Query("SELECT * FROM experiment")
+    List<Experiment> getAllExperiments();
 }

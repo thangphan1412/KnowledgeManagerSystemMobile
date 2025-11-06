@@ -6,6 +6,8 @@ import androidx.room.Query;
 
 import com.abc.knowledgemanagersystems.model.Users;
 
+import java.util.List;
+
 @Dao
 public interface UserDao {
     @Insert
@@ -16,4 +18,7 @@ public interface UserDao {
 
     @Query("DELETE FROM users")
     void logoutUser();
+
+    @Query("SELECT * FROM users")
+    List<Users> getAllUsers();
 }

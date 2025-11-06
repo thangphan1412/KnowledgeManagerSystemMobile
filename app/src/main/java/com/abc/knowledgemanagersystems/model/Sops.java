@@ -22,6 +22,7 @@ import lombok.Setter;
 @Entity(tableName = "sops",
     foreignKeys = {
         @ForeignKey(
+
                     entity = ExperimentLogs.class,
                     parentColumns = "experiment_log_id",
                     childColumns = "experiments_log_id",

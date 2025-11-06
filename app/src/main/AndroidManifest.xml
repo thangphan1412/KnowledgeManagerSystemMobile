@@ -21,7 +21,9 @@
         android:theme="@style/Theme.KnowledgeManagerSystems">
         <activity
             android:name=".controller.ProtocolActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Protocol / SOP Repository"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <provider
             android:name="com.google.android.gms.ads.MobileAdsInitProvider"
@@ -57,6 +59,13 @@
             android:name=".controller.EquipmentBookingActivity"
             android:exported="false"
             android:label="Đặt lịch Thiết bị" />
+
+        <activity
+            android:name=".controller.AddNewProtocolActivity"
+            android:exported="false"
+            android:label="Add New Protocol" />
+        <activity android:name=".controller.ViewProtocolActivity"
+            android:exported="true"/>
 
     </application>
 

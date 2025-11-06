@@ -80,8 +80,10 @@ public class HomeActivity extends AppCompatActivity {
                     // TODO: Mở CreateExperimentActivity (nếu có)
 
                 } else if (id == R.id.nav_sops) {
-                    Toast.makeText(HomeActivity.this, "Mở SOPs", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(HomeActivity.this, "Mở SOPs", Toast.LENGTH_SHORT).show();
                     // TODO: MSopsActivity (nếu có)
+                    Intent intent = new Intent(HomeActivity.this, ProtocolActivity.class);
+                    startActivity(intent);
                 }
 
                 // Đóng menu lại sau khi đã xử lý click
