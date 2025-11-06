@@ -67,6 +67,10 @@
         <activity android:name=".controller.ViewProtocolActivity"
             android:exported="true"/>
 
+        <activity android:name=".controller.SDSLookupActivity"
+            android:exported="true"
+            android:label="SDS Lookup" />
+
     </application>
 
 </manifest>
