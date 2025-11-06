@@ -62,33 +62,29 @@ public class HomeActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 // Kiểm tra xem người dùng bấm vào item nào
-                if (id == R.id.nav_profile) {
+                if (id == R.id.nav_home) {
                     Toast.makeText(HomeActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
 
-                } else if (id == R.id.nav_sds) {
+                } else if (id == R.id.nav_equipment) {
                     // Mở màn hình Chi tiết Thiết bị
                     // (Yêu cầu bạn đã tạo EquipmentDetailActivity.java và khai báo trong Manifest)
                     Intent intent = new Intent(HomeActivity.this, EquipmentDetailActivity.class);
                     startActivity(intent);
 
-                } else if (id == R.id.nav_setting) {
+                } else if (id == R.id.nav_inventory) {
                     Toast.makeText(HomeActivity.this, "Mở Inventory", Toast.LENGTH_SHORT).show();
                     // TODO: Mở InventoryActivity (nếu có)
 
-                } else if (id == R.id.nav_help) {
+                } else if (id == R.id.nav_experiment) {
                     Toast.makeText(HomeActivity.this, "Mở Experiment", Toast.LENGTH_SHORT).show();
                     // TODO: Mở CreateExperimentActivity (nếu có)
 
-                } else if (id == R.id.nav_app) {
-                    Toast.makeText(HomeActivity.this, "Mở SOPs", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.nav_sops) {
+                    //Toast.makeText(HomeActivity.this, "Mở SOPs", Toast.LENGTH_SHORT).show();
                     // TODO: MSopsActivity (nếu có)
                     Intent intent = new Intent(HomeActivity.this, ProtocolActivity.class);
                     startActivity(intent);
-                } else if (id == R.id.nav_logout) {
-
-
                 }
-
 
                 // Đóng menu lại sau khi đã xử lý click
                 drawerLayout.closeDrawer(GravityCompat.END);
