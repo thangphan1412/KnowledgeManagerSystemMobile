@@ -43,7 +43,14 @@ public class EquipmentDetailActivity extends AppCompatActivity {
 
         // 1. Nạp file layout
         setContentView(R.layout.activity_equipment_detail);
+        long equipmentId = getIntent().getLongExtra("EQUIPMENT_ID", -1L);
 
+        if (equipmentId == -1L) {
+            // Xử lý lỗi (không nhận được ID)
+            Toast.makeText(this, "Lỗi: Không tìm thấy ID thiết bị", Toast.LENGTH_LONG).show();
+            finish(); // Đóng Activity
+            return;
+        }
         // TODO: Nhận equipmentId được gửi từ HomeActivity
         // equipmentId = getIntent().getLongExtra("EQUIPMENT_ID", -1);
 
