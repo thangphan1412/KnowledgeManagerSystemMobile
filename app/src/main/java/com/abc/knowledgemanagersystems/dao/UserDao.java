@@ -24,11 +24,15 @@ public interface UserDao {
     List<Users> getAllUsers();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Users> users);
+    @Query("SELECT * FROM users WHERE email = :email AND password = :password LIMIT 1")
+    Users authenticateUser(String email, String password);
 
 //     Lấy tất cả để kiểm tra
 //    @Query("SELECT * FROM users ORDER BY id DESC")
 //    List<Users> getAll();
 // Thêm 1 user (trả về id đã insert)
-//    @Insert(onConflict = OnConflictStrategy.ABORT)
-//    int insert(Users user);
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    void insert(Users user);
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    Users getUserByEmail(String email);
 }

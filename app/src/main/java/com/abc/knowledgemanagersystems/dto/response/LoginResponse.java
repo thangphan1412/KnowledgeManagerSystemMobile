@@ -1,4 +1,4 @@
-package com.abc.knowledgemanagersystems.response;
+package com.abc.knowledgemanagersystems.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +11,6 @@ import lombok.Setter;
 @Setter
 public class LoginResponse {
     private String jwtToken;
-    private String role; // Ví dụ: "ADMIN", "RESEARCHER", "TECHNICIAN"
-    private int userId;
+    private String role;
+
 }

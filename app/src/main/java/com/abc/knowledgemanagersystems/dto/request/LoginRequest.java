@@ -1,4 +1,4 @@
-package com.abc.knowledgemanagersystems.request;
+package com.abc.knowledgemanagersystems.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

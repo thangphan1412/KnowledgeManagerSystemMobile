@@ -1,7 +1,7 @@
 package com.abc.knowledgemanagersystems.API;
 
-import com.abc.knowledgemanagersystems.request.LoginRequest;
-import com.abc.knowledgemanagersystems.response.LoginResponse;
+import com.abc.knowledgemanagersystems.dto.request.LoginRequest;
+import com.abc.knowledgemanagersystems.dto.response.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
