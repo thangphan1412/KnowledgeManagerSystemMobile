@@ -30,5 +30,9 @@
             android:id="@+id/nav_sops"
             android:icon="@drawable/baseline_equipment_24"
             android:title="SOPs" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_arrow_back"
+            android:title="Logout" />
     </group>
 </menu>
