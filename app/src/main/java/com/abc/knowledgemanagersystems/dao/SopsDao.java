@@ -20,4 +20,7 @@ public interface SopsDao {
 
     @Query("DELETE FROM sops WHERE sop_id = :id")
     void deleteSop(int id);
+
+    @Query("SELECT * FROM sops WHERE sopsName LIKE :query OR title LIKE :query")
+    List<Sops> searchSDS(String query);
 }
