@@ -31,11 +31,8 @@ public class LoginService {
             LoginResponse mockResponse = new LoginResponse();
             mockResponse.setJwtToken("mock_jwt_token_12345");
             if (email.contains("admin")) {
-                mockResponse.setRole("ADMIN");
-            } else {
-                mockResponse.setRole("RESEARCHER");
+                mockResponse.setRole("MANAGER");
             }
-
             // 3. LƯU TOKEN VÀ ROLE VÀO LƯU TRỮ AN TOÀN (như code gốc)
             authPreferences.saveAuthData(mockResponse.getJwtToken(), mockResponse.getRole());
 

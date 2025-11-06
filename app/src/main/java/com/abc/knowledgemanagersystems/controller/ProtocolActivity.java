@@ -2,6 +2,7 @@ package com.abc.knowledgemanagersystems.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
@@ -35,6 +36,7 @@ public class ProtocolActivity extends AppCompatActivity {
     private SearchView searchView;
     private FloatingActionButton fabAdd;
     private SopsAdapter adapter;
+    private ImageButton btnBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class ProtocolActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewProtocols);
         searchView = findViewById(R.id.searchViewProtocol);
         fabAdd = findViewById(R.id.fabAddProtocol);
+        btnBack = findViewById(R.id.btnBack);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -58,6 +61,7 @@ public class ProtocolActivity extends AppCompatActivity {
 //            });
 //        });
 
+        btnBack.setOnClickListener(v -> finish());
         if (USE_MOCK_DATA) {
             // Fake data for testing
             List<Sops> mockList = new ArrayList<>();
