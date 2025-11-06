@@ -1,136 +1,3 @@
-//package com.abc.knowledgemanagersystems.controller;
-//
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.view.MenuItem;
-//import android.view.View;
-//import android.widget.Toast;
-//
-//import androidx.activity.OnBackPressedCallback;
-//import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.core.view.GravityCompat;
-//import androidx.drawerlayout.widget.DrawerLayout;
-//
-//
-//import com.abc.knowledgemanagersystems.R;
-//import com.google.android.material.appbar.MaterialToolbar;
-//import com.google.android.material.navigation.NavigationView;
-//
-//public class HomeActivity extends AppCompatActivity {
-//
-//    private DrawerLayout drawerLayout;
-//    private MaterialToolbar toolbar;
-//    private NavigationView navigationView;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        // 1. SỬA LỖI CRASH: Nạp đúng file layout chứa DrawerLayout
-//        // File activity_main.xml của bạn chứa layout_homepage.xml bên trong nó.
-//        setContentView(R.layout.activity_main);
-//
-//        // 2. Ánh xạ các View
-//        drawerLayout = findViewById(R.id.drawer_layout);
-//        navigationView = findViewById(R.id.navigation_view);
-//
-//        // 3. Ánh xạ Toolbar
-//        // LƯU Ý: toolbar nằm BÊN TRONG layout_homepage.xml,
-//        // nhưng vì layout_homepage đã được <include> vào activity_main,
-//        // chúng ta vẫn có thể tìm thấy nó bình thường.
-//        toolbar = findViewById(R.id.toolbar);
-//        // (Hãy chắc chắn ID của toolbar trong layout_homepage.xml là "toolbar")
-//
-//        // 4. Cài đặt Toolbar để mở Menu
-//        toolbar.setOnMenuItemClickListener(new MaterialToolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                // Đảm bảo menu của toolbar có 1 item tên 'action_menu'
-//                if (item.getItemId() == R.id.action_menu) {
-//                    drawerLayout.openDrawer(GravityCompat.END); // Mở menu từ bên phải
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-//
-//        // 5. Cài đặt xử lý click cho các item trong Menu (NavigationView)
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                int id = item.getItemId();
-//
-//                // Kiểm tra xem người dùng bấm vào item nào
-//                if (id == R.id.nav_home) {
-//                    Toast.makeText(HomeActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
-//
-//                } else if (id == R.id.nav_equipment) {
-//                    // Mở màn hình Chi tiết Thiết bị
-//                    // (Yêu cầu bạn đã tạo EquipmentDetailActivity.java và khai báo trong Manifest)
-//                    Intent intent = new Intent(HomeActivity.this, EquipmentDetailActivity.class);
-//                    startActivity(intent);
-//
-//                } else if (id == R.id.nav_inventory) {
-//                    Toast.makeText(HomeActivity.this, "Mở Inventory", Toast.LENGTH_SHORT).show();
-//                    // TODO: Mở InventoryActivity (nếu có)
-//
-//                } else if (id == R.id.nav_experiment) {
-//                    Toast.makeText(HomeActivity.this, "Mở Experiment", Toast.LENGTH_SHORT).show();
-//                    // TODO: Mở CreateExperimentActivity (nếu có)
-//
-//                } else if (id == R.id.nav_sops) {
-//                    Toast.makeText(HomeActivity.this, "Mở SOPs", Toast.LENGTH_SHORT).show();
-//                    // TODO: MSopsActivity (nếu có)
-//                }
-//
-//                // Đóng menu lại sau khi đã xử lý click
-//                drawerLayout.closeDrawer(GravityCompat.END);
-//                return true;
-//            }
-//        });
-//
-//        // 6. Xử lý nút Back (Cách mới, tương thích cử chỉ vuốt)
-//        setupOnBackPressed();
-//    }
-//
-//    /**
-//     * Cài đặt OnBackPressedDispatcher để thay thế cho onBackPressed() đã cũ.
-//     * Logic: Khi menu mở, bấm Back sẽ đóng menu. Khi menu đóng, bấm Back sẽ thoát app.
-//     */
-//    private void setupOnBackPressed() {
-//        // Tạo một Callback mới, ban đầu tắt (false)
-//        OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(false) {
-//            @Override
-//            public void handleOnBackPressed() {
-//                // Khi callback này được BẬT, nó chỉ làm 1 việc: đóng menu
-//                drawerLayout.closeDrawer(GravityCompat.END);
-//            }
-//        };
-//
-//        // Thêm callback vào dispatcher
-//        getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
-//
-//        // Thêm listener vào DrawerLayout để BẬT/TẮT callback một cách linh động
-//        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-//            @Override
-//            public void onDrawerOpened(View drawerView) {
-//                // Khi menu MỞ, BẬT callback lên
-//                onBackPressedCallback.setEnabled(true);
-//            }
-//
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//                // Khi menu ĐÓNG, TẮT callback đi
-//                onBackPressedCallback.setEnabled(false);
-//            }
-//        });
-//    }
-//
-//    // KHÔNG CẦN override onBackPressed() cũ nữa.
-//}
-
-
 package com.abc.knowledgemanagersystems.controller;
 
 import android.content.Intent;
@@ -147,12 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import com.abc.knowledgemanagersystems.R;
-import com.abc.knowledgemanagersystems.controller.CreateExperimentActivity;
-import com.abc.knowledgemanagersystems.controller.EquipmentDetailActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.bottomnavigation.BottomNavigationView; // 📢 Thêm Import này
-import com.google.android.material.navigation.NavigationBarView; // 📢 Thêm Import này
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -160,142 +23,115 @@ public class HomeActivity extends AppCompatActivity {
     private MaterialToolbar toolbar;
     private NavigationView navigationView;
 
-    private BottomNavigationView bottomNavigationView; // 📢 Khai báo Bottom Nav
-
-    // Đảm bảo bạn đã khai báo Activity này trong Manifest
-    private static final Class<?> EXPERIMENT_ACTIVITY = CreateExperimentActivity.class;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 1. Nạp Layout
+        // 1. SỬA LỖI CRASH: Nạp đúng file layout chứa DrawerLayout
+        // File activity_main.xml của bạn chứa layout_homepage.xml bên trong nó.
         setContentView(R.layout.activity_main);
 
         // 2. Ánh xạ các View
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+
+        // 3. Ánh xạ Toolbar
+        // LƯU Ý: toolbar nằm BÊN TRONG layout_homepage.xml,
+        // nhưng vì layout_homepage đã được <include> vào activity_main,
+        // chúng ta vẫn có thể tìm thấy nó bình thường.
         toolbar = findViewById(R.id.toolbar);
-        bottomNavigationView = findViewById(R.id.bottom_navigation_view); // 📢 Ánh xạ Bottom Nav
+        // (Hãy chắc chắn ID của toolbar trong layout_homepage.xml là "toolbar")
 
-        // 3. Cài đặt Toolbar để mở Menu (Navigation Drawer)
-        setupToolbarMenu();
-
-        // 4. Cài đặt xử lý click cho Navigation Drawer
-        setupDrawerMenu();
-
-        // 5. Cài đặt xử lý click cho Bottom Navigation View 📢 PHẦN MỚI
-        setupBottomNavigationView();
-
-        // 6. Xử lý nút Back
-        setupOnBackPressed();
-    }
-
-    // -----------------------------------------------------------
-    // 📢 PHƯƠNG THỨC MỚI: Xử lý Bottom Navigation View
-    // -----------------------------------------------------------
-
-    private void setupBottomNavigationView() {
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        // 4. Cài đặt Toolbar để mở Menu
+        toolbar.setOnMenuItemClickListener(new MaterialToolbar.OnMenuItemClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int itemId = item.getItemId();
-
-                //  Kiểm tra ID của mục Experiment trong bottom_nav_manu.xml
-                if (itemId == R.id.nav_experiment) {
-                    // Chuyển sang màn hình Tạo Thí nghiệm
-                    Intent intent = new Intent(HomeActivity.this, EXPERIMENT_ACTIVITY);
-                    startActivity(intent);
-
-                    // Bạn có thể không muốn kết thúc HomeActivity,
-                    // nhưng nếu bạn muốn nó trở lại màn hình Home, hãy giữ nó.
-                    // finish();
-
+            public boolean onMenuItemClick(MenuItem item) {
+                // Đảm bảo menu của toolbar có 1 item tên 'action_menu'
+                if (item.getItemId() == R.id.action_menu) {
+                    drawerLayout.openDrawer(GravityCompat.END); // Mở menu từ bên phải
                     return true;
                 }
-
-                // 📢 Xử lý mục Home (ví dụ: cuộn lên đầu hoặc không làm gì)
-                else if (itemId == R.id.nav_home) {
-                    Toast.makeText(HomeActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-
-                // 📢 Xử lý mục Inventory (ví dụ)
-                else if (itemId == R.id.nav_inventory) {
-                    Toast.makeText(HomeActivity.this, "Mở Inventory từ Footer", Toast.LENGTH_SHORT).show();
-                    // Intent intent = new Intent(HomeActivity.this, InventoryActivity.class);
-                    // startActivity(intent);
-                    return true;
-                }
-
-                // Đảm bảo ID nav_experiment đã có trong file res/menu/bottom_nav_manu.xml
-
                 return false;
             }
         });
 
-        // Đặt mục Home được chọn mặc định khi Activity khởi tạo
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
-    }
+        // 5. Cài đặt xử lý click cho các item trong Menu (NavigationView)
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
 
-    // -----------------------------------------------------------
-    // 📢 CÁC PHƯƠNG THỨC GỐC ĐỂ DỄ QUẢN LÝ
-    // -----------------------------------------------------------
+                // Kiểm tra xem người dùng bấm vào item nào
+                if (id == R.id.nav_profile) {
+                    Toast.makeText(HomeActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
 
-    private void setupToolbarMenu() {
-        toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_menu) {
-                drawerLayout.openDrawer(GravityCompat.END);
+                } else if (id == R.id.nav_sds) {
+                    // Mở màn hình Chi tiết Thiết bị
+                    // (Yêu cầu bạn đã tạo EquipmentDetailActivity.java và khai báo trong Manifest)
+                    Intent intent = new Intent(HomeActivity.this, EquipmentDetailActivity.class);
+                    startActivity(intent);
+
+                } else if (id == R.id.nav_setting) {
+                    Toast.makeText(HomeActivity.this, "Mở Inventory", Toast.LENGTH_SHORT).show();
+                    // TODO: Mở InventoryActivity (nếu có)
+
+                } else if (id == R.id.nav_help) {
+                    Toast.makeText(HomeActivity.this, "Mở Experiment", Toast.LENGTH_SHORT).show();
+                    // TODO: Mở CreateExperimentActivity (nếu có)
+
+                } else if (id == R.id.nav_app) {
+                    Toast.makeText(HomeActivity.this, "Mở SOPs", Toast.LENGTH_SHORT).show();
+                    // TODO: MSopsActivity (nếu có)
+                    Intent intent = new Intent(HomeActivity.this, ProtocolActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.nav_logout) {
+
+
+                }
+
+
+                // Đóng menu lại sau khi đã xử lý click
+                drawerLayout.closeDrawer(GravityCompat.END);
                 return true;
             }
-            return false;
         });
+
+        // 6. Xử lý nút Back (Cách mới, tương thích cử chỉ vuốt)
+        setupOnBackPressed();
     }
 
-    private void setupDrawerMenu() {
-        navigationView.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
-
-            // Logic xử lý Navigation Drawer... (Giữ nguyên logic cũ của bạn)
-            if (id == R.id.navigation_home) {
-                Toast.makeText(HomeActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.navigation_inventory) {
-                Intent intent = new Intent(HomeActivity.this, EquipmentDetailActivity.class);
-                startActivity(intent);
-            } else if (id == R.id.navigation_experiment) {
-                // 📢 Đã có logic chuyển màn hình trong Bottom Nav, nhưng giữ ở đây nếu cần
-                Toast.makeText(HomeActivity.this, "Mở Experiment từ Drawer", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, EXPERIMENT_ACTIVITY);
-                startActivity(intent);
-            }
-            // ... (các mục khác)
-
-            drawerLayout.closeDrawer(GravityCompat.END);
-            return true;
-        });
-    }
-
+    /**
+     * Cài đặt OnBackPressedDispatcher để thay thế cho onBackPressed() đã cũ.
+     * Logic: Khi menu mở, bấm Back sẽ đóng menu. Khi menu đóng, bấm Back sẽ thoát app.
+     */
     private void setupOnBackPressed() {
-        // Logic xử lý nút Back (Giữ nguyên logic cũ của bạn)
+        // Tạo một Callback mới, ban đầu tắt (false)
         OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(false) {
             @Override
             public void handleOnBackPressed() {
+                // Khi callback này được BẬT, nó chỉ làm 1 việc: đóng menu
                 drawerLayout.closeDrawer(GravityCompat.END);
             }
         };
+
+        // Thêm callback vào dispatcher
         getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 
+        // Thêm listener vào DrawerLayout để BẬT/TẮT callback một cách linh động
         drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerOpened(View drawerView) {
+                // Khi menu MỞ, BẬT callback lên
                 onBackPressedCallback.setEnabled(true);
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
+                // Khi menu ĐÓNG, TẮT callback đi
                 onBackPressedCallback.setEnabled(false);
             }
         });
     }
+
+    // KHÔNG CẦN override onBackPressed() cũ nữa.
 }

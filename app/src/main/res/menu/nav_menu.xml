@@ -6,29 +6,33 @@
     <!-- Tôi đoán menu của bạn cũng có các mục tương tự -->
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/baseline_home_24"
-            android:title="Home" />
+            android:title="View profile" />
 
         <!-- NÚT BẠN CẦN ĐÂY -->
         <item
-            android:id="@+id/nav_equipment"
+            android:id="@+id/nav_sds"
             android:icon="@drawable/baseline_equipment_24"
-            android:title="Equipment" />
+            android:title="Safety Data Sheet (SDS) lookup" />
 
         <item
-            android:id="@+id/nav_inventory"
+            android:id="@+id/nav_setting"
             android:icon="@drawable/baseline_home_24"
-            android:title="Inventory" />
+            android:title="Setting" />
 
         <item
-            android:id="@+id/nav_experiment"
+            android:id="@+id/nav_help"
             android:icon="@drawable/baseline_equipment_24"
-            android:title="Experiment" />
+            android:title="Help/Support" />
 
         <item
-            android:id="@+id/nav_sops"
+            android:id="@+id/nav_app"
             android:icon="@drawable/baseline_equipment_24"
-            android:title="SOPs" />
+            android:title="About app" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/baseline_equipment_24"
+            android:title="Logout" />
     </group>
 </menu>
