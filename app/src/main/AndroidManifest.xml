@@ -36,7 +36,7 @@
 
         <activity
             android:name=".controller.LoginController"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".controller.ProtocolActivity"
             android:exported="false"

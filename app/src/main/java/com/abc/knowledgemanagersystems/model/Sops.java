@@ -28,6 +28,7 @@ import lombok.Setter;
                     childColumns = "experiments_log_id",
                     onDelete = ForeignKey.CASCADE
             )
+
     }
 )
 public class Sops {
@@ -43,5 +44,6 @@ public class Sops {
     private String safeDataSheet;
     @ColumnInfo(name ="experiments_log_id" )
     private int experimentId;
+
 
 }
