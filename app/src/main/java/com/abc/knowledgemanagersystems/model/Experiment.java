@@ -4,11 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
 import com.abc.knowledgemanagersystems.status.StatusExperiment;
-
 import org.jetbrains.annotations.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(tableName = "experiment",
         foreignKeys = {
-        @ForeignKey(
+                @ForeignKey(
                         entity = Users.class,
                         parentColumns = "user_id",
                         childColumns = "users_id",
@@ -31,10 +28,8 @@ import lombok.Setter;
                         parentColumns = "sop_id",
                         childColumns = "sops_id",
                         onDelete = ForeignKey.CASCADE
-
                 )
         }
-
 )
 public class Experiment {
     @PrimaryKey(autoGenerate = true)
@@ -47,10 +42,15 @@ public class Experiment {
     private StatusExperiment statusExperiment;
     @ColumnInfo(name = "users_id")
     private int userId;
+
+    // ================================================================
+    // SỬA DÒNG NÀY ĐỂ PHÁ VỠ VÒNG LẶP
+    // TỪ: private int sopId;
+    // THÀNH:
+    // ================================================================
     @ColumnInfo(name = "sops_id")
-    private int sopId;
+    private Integer sopId; // <-- Phải là 'Integer' (object) để có thể null
 
     public String serverExperimentId;
     public boolean isSynced;
-
 }

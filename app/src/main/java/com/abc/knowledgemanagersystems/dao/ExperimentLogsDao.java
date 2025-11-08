@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface ExperimentLogsDao {
     @Insert
-    void insert(ExperimentLogs experimentLogs);
+    long insert(ExperimentLogs experimentLogs);
 
     @Query("SELECT * FROM experiments_logs")
     List<ExperimentLogs> getAllExperiments();

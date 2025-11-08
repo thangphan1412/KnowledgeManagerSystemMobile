@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer; // <-- THÊM IMPORT NÀY
+import androidx.lifecycle.ViewModelProvider; // <-- THÊM IMPORT NÀY
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abc.knowledgemanagersystems.R;
+// SỬA IMPORT NÀY để trỏ đến package 'adapter' của bạn
 import com.abc.knowledgemanagersystems.adapter.EquipmentAdapter;
 import com.abc.knowledgemanagersystems.model.Equipment;
+import com.abc.knowledgemanagersystems.viewmodel.EquipmentViewModel; // <-- THÊM IMPORT NÀY
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +21,10 @@ import java.util.List;
 public class EquipmentListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private EquipmentAdapter adapter;
+    private EquipmentAdapter adapter; // Adapter từ package 'adapter'
+    private EquipmentViewModel equipmentViewModel; // <-- THÊM VIEWMODEL
+
+    // Khởi tạo list rỗng
     private List<Equipment> equipmentList = new ArrayList<>();
 
     @Override
@@ -28,42 +35,38 @@ public class EquipmentListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_equipment_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // 2. Tải dữ liệu (ĐÃ SỬA)
-        loadPlaceholderData();
-
+        // 1. Khởi tạo Adapter với danh sách RỖNG
+        // (Dữ liệu sẽ được nạp vào ở Bước 3)
         adapter = new EquipmentAdapter(equipmentList);
         recyclerView.setAdapter(adapter);
 
-        // 4. Xử lý click (ĐÃ SỬA)
+        // 2. LẤY VIEWMODEL (TỪ BƯỚC 3)
+        equipmentViewModel = new ViewModelProvider(this).get(EquipmentViewModel.class);
+
+        // 3. LẮNG NGHE (OBSERVE) THAY ĐỔI TỪ DATABASE
+        // Đây là "Core Logic" mới của bạn
+        equipmentViewModel.getAllEquipment().observe(this, new Observer<List<Equipment>>() {
+            @Override
+            public void onChanged(List<Equipment> equipments) {
+                // KHI DỮ LIỆU THAY ĐỔI (TỪ DATABASE)
+
+                // Cập nhật danh sách trong Adapter
+                equipmentList.clear();
+                equipmentList.addAll(equipments);
+                adapter.notifyDataSetChanged(); // Báo cho RecyclerView vẽ lại
+            }
+        });
+
+        // 4. XỬ LÝ CLICK (Giữ nguyên logic của bạn)
+        // (Sử dụng interface 'OnItemClickListener' mà bạn đã định nghĩa)
         adapter.setOnItemClickListener(equipment -> {
             Intent intent = new Intent(EquipmentListActivity.this, EquipmentDetailActivity.class);
-
-            // ID của bạn là 'int', không phải 'long'
             intent.putExtra("EQUIPMENT_ID", equipment.getId());
-
             startActivity(intent);
         });
     }
 
-    // --- SỬA LOGIC Ở HÀM NÀY ---
-    private void loadPlaceholderData() {
-        // Dùng NoArgsConstructor và Setter (vì model của bạn có Lombok)
-        Equipment eq1 = new Equipment();
-        eq1.setId(101); // ID của bạn là 'int'
-        eq1.setName("HPLC Machine #1");
-        eq1.setModel("Agilent 1260"); // Model của bạn có trường 'model'
-        equipmentList.add(eq1);
-
-        Equipment eq2 = new Equipment();
-        eq2.setId(102);
-        eq2.setName("Centrifuge");
-        eq2.setModel("Eppendorf 5424 R");
-        equipmentList.add(eq2);
-
-        Equipment eq3 = new Equipment();
-        eq3.setId(103);
-        eq3.setName("PCR Machine");
-        eq3.setModel("Bio-Rad T100");
-        equipmentList.add(eq3);
-    }
+    // 5. XÓA BỎ HÀM loadPlaceholderData()
+    // (Vì dữ liệu giờ đã được lấy từ Database)
+    // private void loadPlaceholderData() { ... }
 }

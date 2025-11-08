@@ -5,10 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-
     <application
         android:name=".db.MyApplication"
         android:allowBackup="true"
@@ -19,11 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KnowledgeManagerSystems">
-        <activity
-            android:name=".controller.ProtocolActivity"
-            android:exported="false"
-            android:label="Protocol / SOP Repository"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <provider
             android:name="com.google.android.gms.ads.MobileAdsInitProvider"
@@ -33,17 +24,29 @@
             tools:replace="android:authorities" />
 
         <activity
-            android:name=".controller.LoginController"
-            android:exported="true">
+            android:name=".controller.EquipmentListActivity"
+            android:exported="true"
+            android:label="Danh sách Thiết bị">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".controller.LoginController"
+            android:exported="false" />
+        <activity
+            android:name=".controller.ProtocolActivity"
+            android:exported="false"
+            android:label="Protocol / SOP Repository"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
         <activity
             android:name=".controller.CreateExperimentActivity"
             android:exported="false" />
+
         <activity
             android:name=".controller.HomeActivity"
             android:exported="false" />
@@ -52,8 +55,6 @@
             android:name=".controller.EquipmentDetailActivity"
             android:exported="false"
             android:label="Chi tiết Thiết bị" />
-
-
 
         <activity
             android:name=".controller.EquipmentBookingActivity"
@@ -64,6 +65,7 @@
             android:name=".controller.AddNewProtocolActivity"
             android:exported="false"
             android:label="Add New Protocol" />
+
         <activity android:name=".controller.ViewProtocolActivity"
             android:exported="true"/>
 
