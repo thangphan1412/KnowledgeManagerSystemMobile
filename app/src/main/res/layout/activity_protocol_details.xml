@@ -136,10 +136,12 @@
                         android:id="@+id/tvWarnings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lorem ipsum dolor sit amt, consectetur adpiscing elit."
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                         android:textSize="14sp"
                         android:textColor="@color/black"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="16dp"
+                        android:autoLink="none"
+                        android:linksClickable="false"/>
 
                     <!-- Start Experiment Button -->
                     <androidx.cardview.widget.CardView

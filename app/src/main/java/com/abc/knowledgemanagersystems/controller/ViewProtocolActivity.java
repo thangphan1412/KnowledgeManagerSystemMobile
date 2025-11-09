@@ -105,9 +105,7 @@ public class ViewProtocolActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     tvProtocolTitle.setText(selectedSop.getTitle());
                     tvProtocolIntro.setText(selectedSop.getDescription());
-                    tvWarnings.setText(selectedSop.getSafeDataSheet() != null && !selectedSop.getSafeDataSheet().isEmpty()
-                            ? selectedSop.getSafeDataSheet()
-                            : "No warnings available.");
+                    tvWarnings.setText("Be careful when handling");
                 });
             }
         });

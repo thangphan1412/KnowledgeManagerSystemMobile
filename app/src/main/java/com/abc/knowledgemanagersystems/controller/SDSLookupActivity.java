@@ -1,14 +1,17 @@
 package com.abc.knowledgemanagersystems.controller;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -20,10 +23,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.abc.knowledgemanagersystems.R;
 import com.abc.knowledgemanagersystems.adapter.SDSAdapter;
-import com.abc.knowledgemanagersystems.model.Sops;
 import com.abc.knowledgemanagersystems.db.AppDataBase;
+import com.abc.knowledgemanagersystems.model.Sops;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +41,16 @@ public class SDSLookupActivity extends AppCompatActivity implements SDSAdapter.O
     private List<Sops> sdsList = new ArrayList<>();
     private AppDataBase db;
 
+    // PdfRenderer
+    private FrameLayout pdfContainer;
+    private ImageView pdfImageView;
+    private Button btnClosePdf, btnPrevPage, btnNextPage;
+
+    private PdfRenderer pdfRenderer;
+    private PdfRenderer.Page currentPage;
+    private ParcelFileDescriptor parcelFileDescriptor;
+    private int currentPageIndex = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +63,17 @@ public class SDSLookupActivity extends AppCompatActivity implements SDSAdapter.O
         loadingView = findViewById(R.id.loadingView);
         ImageButton btnBack = findViewById(R.id.btnBack);
 
+        pdfContainer = findViewById(R.id.pdfContainer);
+        pdfImageView = findViewById(R.id.pdfImageView);
+        btnClosePdf = findViewById(R.id.btnClosePdf);
+        btnPrevPage = findViewById(R.id.btnPrevPage);
+        btnNextPage = findViewById(R.id.btnNextPage);
+
         btnBack.setOnClickListener(v -> finish());
+
+        btnClosePdf.setOnClickListener(v -> closePdfViewer());
+        btnPrevPage.setOnClickListener(v -> showPage(currentPageIndex - 1));
+        btnNextPage.setOnClickListener(v -> showPage(currentPageIndex + 1));
 
         // Database instance
         db = AppDataBase.getInstance(this);
@@ -63,7 +87,6 @@ public class SDSLookupActivity extends AppCompatActivity implements SDSAdapter.O
         searchViewSDS.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() >= 2) {
@@ -74,7 +97,6 @@ public class SDSLookupActivity extends AppCompatActivity implements SDSAdapter.O
                     showEmptyState();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -82,21 +104,16 @@ public class SDSLookupActivity extends AppCompatActivity implements SDSAdapter.O
 
     private void fetchSDSFromDB(String query) {
         showLoading(true);
-
         new Thread(() -> {
-            List<Sops> results = db.sopsDao().searchSDS("%" + query + "%"); // Tạo query LIKE tên hóa chất
-
+            List<Sops> results = db.sopsDao().searchSDS("%" + query + "%");
             runOnUiThread(() -> {
                 sdsList.clear();
                 sdsList.addAll(results);
                 adapter.notifyDataSetChanged();
                 showLoading(false);
 
-                if (results.isEmpty()) {
-                    showEmptyState();
-                } else {
-                    emptyStateView.setVisibility(View.GONE);
-                }
+                if (results.isEmpty()) showEmptyState();
+                else emptyStateView.setVisibility(View.GONE);
             });
         }).start();
     }
@@ -114,26 +131,58 @@ public class SDSLookupActivity extends AppCompatActivity implements SDSAdapter.O
         String pdfPath = sops.getSafeDataSheet();
         if (pdfPath != null && !pdfPath.isEmpty()) {
             File pdfFile = new File(pdfPath);
-            if (pdfFile.exists()) {
-                try {
-                    Uri pdfUri = androidx.core.content.FileProvider.getUriForFile(
-                            this,
-                            getPackageName() + ".provider",
-                            pdfFile
-                    );
-
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(pdfUri, "application/pdf");
-                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(this, "No PDF viewer installed", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(this, "PDF file not found", Toast.LENGTH_SHORT).show();
-            }
+            if (pdfFile.exists()) openPdfInApp(pdfFile);
+            else Toast.makeText(this, "PDF file not found", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "No SDS PDF linked", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void openPdfInApp(File file) {
+        try {
+            parcelFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
+            pdfRenderer = new PdfRenderer(parcelFileDescriptor);
+            currentPageIndex = 0;
+            showPage(currentPageIndex);
+            pdfContainer.setVisibility(View.VISIBLE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Cannot open PDF", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showPage(int index) {
+        if (pdfRenderer == null || index < 0 || index >= pdfRenderer.getPageCount()) return;
+
+        if (currentPage != null) currentPage.close();
+        currentPage = pdfRenderer.openPage(index);
+        currentPageIndex = index;
+
+        Bitmap bitmap = Bitmap.createBitmap(currentPage.getWidth(), currentPage.getHeight(), Bitmap.Config.ARGB_8888);
+        currentPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+        pdfImageView.setImageBitmap(bitmap);
+
+        btnPrevPage.setEnabled(index > 0);
+        btnNextPage.setEnabled(index < pdfRenderer.getPageCount() - 1);
+    }
+
+    private void closePdfViewer() {
+        pdfContainer.setVisibility(View.GONE);
+        if (currentPage != null) currentPage.close();
+        currentPage = null;
+        if (pdfRenderer != null) pdfRenderer.close();
+        pdfRenderer = null;
+        try {
+            if (parcelFileDescriptor != null) parcelFileDescriptor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        parcelFileDescriptor = null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closePdfViewer();
     }
 }
