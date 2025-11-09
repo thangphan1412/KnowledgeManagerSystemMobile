@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final Class<?> HOME_ACTIVITY = HomeActivity.class;
     private static final Class<?> EQUIPMENT_ACTIVITY = EquipmentListActivity.class;
 //    private static final Class<?> INVENTORY_ACTIVITY = InventoryActivity.class;
-    private static final Class<?> SOPS_ACTIVITY = ProtocolActivity.class;
+    private static final Class<?> SOPS_ACTIVITY = SDSLookupActivity.class;
     private static final Class<?> LOGIN_ACTIVITY = LoginController.class;
     private static final Class<?> EQUIPMENT_DETAIL_ACTIVITY = EquipmentDetailActivity.class;
     private static final Class<?> PROTOCOL_ACTIVITY = ProtocolActivity.class;
@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity {
 //                startActivity(new Intent(HomeActivity.this, INVENTORY_ACTIVITY));
 //                return true;
             } else if (itemId == R.id.navigation_sops) {
-                startActivity(new Intent(HomeActivity.this, SOPS_ACTIVITY));
+                startActivity(new Intent(HomeActivity.this, PROTOCOL_ACTIVITY));
                 return true;
             }
 
@@ -173,6 +173,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Phê duyệt Protocols", Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.nav_sds) {
+                startActivity(new Intent(HomeActivity.this, SOPS_ACTIVITY));
                 Toast.makeText(HomeActivity.this, "Mở SDS Lookup", Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.nav_setting) {

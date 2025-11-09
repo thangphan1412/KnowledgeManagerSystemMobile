@@ -17,6 +17,7 @@ import com.abc.knowledgemanagersystems.dao.InventoryBookingDao;
 import com.abc.knowledgemanagersystems.dao.InventoryItemDao;
 import com.abc.knowledgemanagersystems.dao.InventoryLogDao;
 import com.abc.knowledgemanagersystems.dao.SopsDao;
+import com.abc.knowledgemanagersystems.dao.StepDao;
 import com.abc.knowledgemanagersystems.dao.UserDao;
 // Import tất cả Model
 import com.abc.knowledgemanagersystems.model.Booking;
@@ -26,6 +27,7 @@ import com.abc.knowledgemanagersystems.model.ExperimentLogs;
 import com.abc.knowledgemanagersystems.model.InventoryItem;
 import com.abc.knowledgemanagersystems.model.InventoryLogs;
 import com.abc.knowledgemanagersystems.model.Sops;
+import com.abc.knowledgemanagersystems.model.Step;
 import com.abc.knowledgemanagersystems.model.Users;
 import com.abc.knowledgemanagersystems.status.RoleName;
 
@@ -40,6 +42,7 @@ import java.util.concurrent.Executors;
         InventoryLogs.class,
         Booking.class,
         Sops.class,
+        Step.class,
         Users.class
 }, version = 1, exportSchema = false
 )
@@ -54,6 +57,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract InventoryItemDao inventoryItemDao();
     public abstract InventoryBookingDao inventoryBookingDao();
     public abstract SopsDao sopsDao();
+    public abstract StepDao stepDao();
     public abstract UserDao userDao();
 
     private static volatile AppDataBase INSTANCE;

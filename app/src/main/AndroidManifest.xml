@@ -28,15 +28,18 @@
             android:exported="true"
             android:label="Danh sách Thiết bị">
 
+
+        </activity>
+
+        <activity
+            android:name=".controller.LoginController"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".controller.LoginController"
-            android:exported="true" />
         <activity
             android:name=".controller.ProtocolActivity"
             android:exported="false"
@@ -72,6 +75,17 @@
         <activity android:name=".controller.SDSLookupActivity"
             android:exported="true"
             android:label="SDS Lookup" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
 
     </application>
 

@@ -89,18 +89,16 @@
             android:layout_weight="1"
             android:background="@android:color/white">
 
-            <!-- Tab Layout -->
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
+            <TextView
+                android:id="@+id/tvStepTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:contentDescription="Protocol sections tabs"
-                app:tabIndicatorColor="@color/pink_500"
-                app:tabSelectedTextColor="@color/black"
-                app:tabTextColor="#666666"
-                app:tabMode="fixed"
-                app:tabGravity="fill"/>
+                android:text="Steps"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:padding="16dp"
+                android:background="@android:color/white"/>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -184,5 +182,17 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddSteps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:contentDescription="Add Steps"
+        android:src="@drawable/ic_add"
+        app:tint="@android:color/white"
+        app:backgroundTint="@color/pink_500"
+        app:fabSize="normal"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

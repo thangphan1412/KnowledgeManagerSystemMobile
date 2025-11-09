@@ -38,7 +38,7 @@ public class AddNewProtocolActivity extends AppCompatActivity {
         edtSopsName = findViewById(R.id.edtSopsName);
         edtTitle = findViewById(R.id.edtTitle);
         edtDescription = findViewById(R.id.edtDescription);
-//        spinnerExperiment = findViewById(R.id.spinnerExperiment);
+        spinnerExperiment = findViewById(R.id.spinnerExperiment);
         btnSave = findViewById(R.id.btnSaveProtocol);
 
         loadExperiments();
@@ -52,28 +52,28 @@ public class AddNewProtocolActivity extends AppCompatActivity {
                     .experimentLogsDao()
                     .getAllExperiments();
 
-//            List<String> names = new ArrayList<>();
-//            for (ExperimentLogs exp : experimentList) {
-//                names.add("Log #" + exp.getId() + " | " + exp.getLogDate());
-//            }
-//
-//            runOnUiThread(() -> {
-//                ArrayAdapter<String> adapter = new ArrayAdapter<>(
-//                        this, android.R.layout.simple_spinner_dropdown_item, names);
-//                spinnerExperiment.setAdapter(adapter);
-//
-//                spinnerExperiment.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
-//                        selectedExperimentId = experimentList.get(position).getId();
-//                    }
-//
-//                    @Override
-//                    public void onNothingSelected(android.widget.AdapterView<?> parent) {
-//                        selectedExperimentId = -1;
-//                    }
-//                });
-//            });
+            List<String> names = new ArrayList<>();
+            for (ExperimentLogs exp : experimentList) {
+                names.add("Log #" + exp.getId());
+            }
+
+            runOnUiThread(() -> {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        this, android.R.layout.simple_spinner_dropdown_item, names);
+                spinnerExperiment.setAdapter(adapter);
+
+                spinnerExperiment.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
+                        selectedExperimentId = experimentList.get(position).getId();
+                    }
+
+                    @Override
+                    public void onNothingSelected(android.widget.AdapterView<?> parent) {
+                        selectedExperimentId = -1;
+                    }
+                });
+            });
         });
     }
 
@@ -82,10 +82,10 @@ public class AddNewProtocolActivity extends AppCompatActivity {
         String title = edtTitle.getText().toString().trim();
         String description = edtDescription.getText().toString().trim();
 
-//        if (sopsName.isEmpty() || title.isEmpty() || selectedExperimentId == -1) {
-//            Toast.makeText(this, "Please fill all fields and select an experiment!", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        if (sopsName.isEmpty() || title.isEmpty() || selectedExperimentId == -1) {
+            Toast.makeText(this, "Please fill all fields and select an experiment!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
@@ -96,7 +96,7 @@ public class AddNewProtocolActivity extends AppCompatActivity {
         sops.setCreateAt(currentDate);
         sops.setFilePath("");
         sops.setSafeDataSheet("");
-//        sops.setExperimentId(selectedExperimentId);
+        sops.setExperimentId(selectedExperimentId);
 
         Executors.newSingleThreadExecutor().execute(() -> {
             AppDataBase.getInstance(this).sopsDao().insert(sops);

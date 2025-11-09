@@ -51,53 +51,55 @@ public class ProtocolActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 //         Load data from Room database
-//        Executors.newSingleThreadExecutor().execute(() -> {
-//            List<Sops> list = AppDataBase.getInstance(this).sopsDao().getAllSops();
-//            runOnUiThread(() -> {
-//                adapter = new SopsAdapter(this, list, sop -> {
-//                    // Handle click -> open details
-//                });
-//                recyclerView.setAdapter(adapter);
-//            });
-//        });
-
-        btnBack.setOnClickListener(v -> finish());
-        if (USE_MOCK_DATA) {
-            // Fake data for testing
-            List<Sops> mockList = new ArrayList<>();
-            mockList.add(new Sops(1, "SOP-001", "DNA Extraction Protocol",
-                    "Standard procedure for DNA extraction using ethanol precipitation.",
-                    "2025-10-20", "/path/dna_extraction.pdf", "Always wear gloves and goggles.", 0));
-
-            mockList.add(new Sops(2, "SOP-002", "Cell Culture Handling",
-                    "Procedure for aseptic handling of mammalian cell cultures.",
-                    "2025-10-22", "/path/cell_culture.pdf", "Sterilize workspace and use biosafety cabinet.", 0));
-
-            mockList.add(new Sops(3, "SOP-003", "PCR Amplification",
-                    "Steps for preparing and running polymerase chain reaction (PCR).",
-                    "2025-10-25", "/path/pcr_protocol.pdf", "Avoid contamination of template DNA.", 0));
-
-            adapter = new SopsAdapter(this, mockList, sop -> {
-                Intent intent = new Intent(ProtocolActivity.this, ViewProtocolActivity.class);
-                intent.putExtra("SOP_ID", sop.getId());
-                startActivity(intent);
-            });
-            recyclerView.setAdapter(adapter);
-
-        } else {
-            // Normal mode: Load from Room DB
-            Executors.newSingleThreadExecutor().execute(() -> {
-                List<Sops> list = AppDataBase.getInstance(this).sopsDao().getAllSops();
-                runOnUiThread(() -> {
-                    adapter = new SopsAdapter(this, list, sop -> {
-                        Intent intent = new Intent(ProtocolActivity.this, ViewProtocolActivity.class);
+        Executors.newSingleThreadExecutor().execute(() -> {
+            List<Sops> list = AppDataBase.getInstance(this).sopsDao().getAllSops();
+            runOnUiThread(() -> {
+                adapter = new SopsAdapter(this, list, sop -> {
+                    Intent intent = new Intent(ProtocolActivity.this, ViewProtocolActivity.class);
                         intent.putExtra("SOP_ID", sop.getId());
                         startActivity(intent);
-                    });
-                    recyclerView.setAdapter(adapter);
                 });
+                recyclerView.setAdapter(adapter);
             });
-        }
+        });
+
+        btnBack.setOnClickListener(v -> finish());
+//        if (USE_MOCK_DATA) {
+//            // Fake data for testing
+//            List<Sops> mockList = new ArrayList<>();
+//            mockList.add(new Sops(1, "SOP-001", "DNA Extraction Protocol",
+//                    "Standard procedure for DNA extraction using ethanol precipitation.",
+//                    "2025-10-20", "/path/dna_extraction.pdf", "Always wear gloves and goggles.", 0));
+//
+//            mockList.add(new Sops(2, "SOP-002", "Cell Culture Handling",
+//                    "Procedure for aseptic handling of mammalian cell cultures.",
+//                    "2025-10-22", "/path/cell_culture.pdf", "Sterilize workspace and use biosafety cabinet.", 0));
+//
+//            mockList.add(new Sops(3, "SOP-003", "PCR Amplification",
+//                    "Steps for preparing and running polymerase chain reaction (PCR).",
+//                    "2025-10-25", "/path/pcr_protocol.pdf", "Avoid contamination of template DNA.", 0));
+//
+//            adapter = new SopsAdapter(this, mockList, sop -> {
+//                Intent intent = new Intent(ProtocolActivity.this, ViewProtocolActivity.class);
+//                intent.putExtra("SOP_ID", sop.getId());
+//                startActivity(intent);
+//            });
+//            recyclerView.setAdapter(adapter);
+//
+//        } else {
+//            // Normal mode: Load from Room DB
+//            Executors.newSingleThreadExecutor().execute(() -> {
+//                List<Sops> list = AppDataBase.getInstance(this).sopsDao().getAllSops();
+//                runOnUiThread(() -> {
+//                    adapter = new SopsAdapter(this, list, sop -> {
+//                        Intent intent = new Intent(ProtocolActivity.this, ViewProtocolActivity.class);
+//                        intent.putExtra("SOP_ID", sop.getId());
+//                        startActivity(intent);
+//                    });
+//                    recyclerView.setAdapter(adapter);
+//                });
+//            });
+//        }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

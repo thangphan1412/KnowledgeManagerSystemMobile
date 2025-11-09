@@ -41,7 +41,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
 
         public StepViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvStep = itemView.findViewById(R.id.tvStep);
+            tvStep = itemView.findViewById(R.id.tvStepNumber);
         }
     }
 }

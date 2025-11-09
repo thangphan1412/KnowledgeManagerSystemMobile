@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abc.knowledgemanagersystems.R;
@@ -48,7 +49,8 @@ public class SDSAdapter extends RecyclerView.Adapter<SDSAdapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvChemicalName, tvCASNumber, btnViewSDS;
+        TextView tvChemicalName, tvCASNumber;
+        CardView btnViewSDS;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvChemicalName = itemView.findViewById(R.id.tvChemicalName);

@@ -115,10 +115,16 @@ public class SDSLookupActivity extends AppCompatActivity implements SDSAdapter.O
         if (pdfPath != null && !pdfPath.isEmpty()) {
             File pdfFile = new File(pdfPath);
             if (pdfFile.exists()) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(pdfFile), "application/pdf");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 try {
+                    Uri pdfUri = androidx.core.content.FileProvider.getUriForFile(
+                            this,
+                            getPackageName() + ".provider",
+                            pdfFile
+                    );
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(pdfUri, "application/pdf");
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 } catch (Exception e) {
                     Toast.makeText(this, "No PDF viewer installed", Toast.LENGTH_SHORT).show();

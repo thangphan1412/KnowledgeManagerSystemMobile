@@ -22,5 +22,9 @@ public interface SopsDao {
     @Query("SELECT * FROM sops WHERE sopsName LIKE :query OR title LIKE :query")
     List<Sops> searchSDS(String query);
 
+    @Query("SELECT * FROM sops")
+    List<Sops> getAll();
 
+    @Query("SELECT * FROM sops WHERE sop_id = :sopId")
+    Sops getSopById(int sopId);
 }
