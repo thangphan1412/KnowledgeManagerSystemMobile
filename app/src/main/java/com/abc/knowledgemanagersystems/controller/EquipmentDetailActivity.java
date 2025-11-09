@@ -12,111 +12,89 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer; // <-- THÊM IMPORT NÀY
-import androidx.lifecycle.ViewModelProvider; // <-- THÊM IMPORT NÀY
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abc.knowledgemanagersystems.R;
-import com.abc.knowledgemanagersystems.model.Equipment; // <-- THÊM IMPORT NÀY
-import com.abc.knowledgemanagersystems.viewmodel.EquipmentViewModel; // <-- THÊM IMPORT NÀY
+import com.abc.knowledgemanagersystems.model.Equipment;
+import com.abc.knowledgemanagersystems.viewmodel.EquipmentViewModel;
 
 public class EquipmentDetailActivity extends AppCompatActivity {
 
-    // --- Khai báo các View ---
-    private TextView textViewEquipmentName;
-    private TextView textViewModel;
-    private TextView textViewSerial;
-    private TextView textViewEquipmentStatus;
-    private Button buttonDownloadManual;
-    private Button buttonGoToBooking;
+    private TextView textViewEquipmentName, textViewModel, textViewSerial, textViewEquipmentStatus;
+    private Button buttonDownloadManual, buttonGoToBooking;
     private RecyclerView recyclerViewMaintenanceLogs;
-
-    // --- Khai báo ViewModel ---
-    private EquipmentViewModel mViewModel;
-
-    // Biến lưu ID
-    private int equipmentId = -1; // <-- Sửa thành int
-
-    // (Biến lưu URL của file PDF - Sẽ lấy từ database)
+    private EquipmentViewModel mViewModel; // <-- "Backend"
+    private int equipmentId = -1;
     private String manualUrl = "https://www.agilent.com/cs/library/usermanuals/public/G7100-90030_InfinityLab-LC-Series-SitePrep_RevD_EN.pdf";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Dùng layout (model_165) của bạn
         setContentView(R.layout.activity_equipment_detail);
 
-        // 1. LẤY VIEWMODEL (TỪ BƯỚC 3)
+        // Lấy "Backend" (từ Bước 2)
         mViewModel = new ViewModelProvider(this).get(EquipmentViewModel.class);
 
-        // 2. ÁNH XẠ VIEWS
-        // (Sử dụng ID từ layout 'activity_equipment_detail.xml' mà tôi đã gửi)
-        textViewEquipmentName = findViewById(R.id.text_view_equipment_name);
-        textViewModel = findViewById(R.id.text_view_model);
-        textViewSerial = findViewById(R.id.text_view_serial);
-        textViewEquipmentStatus = findViewById(R.id.text_view_equipment_status);
+        // KHỚP VỚI XML CỦA BẠN (Sửa 34 lỗi gạch đỏ)
+        textViewEquipmentName = findViewById(R.id.text_view_equipment_name_detail);
+        textViewModel = findViewById(R.id.text_view_equipment_model_detail);
+        textViewSerial = findViewById(R.id.text_view_serial_detail);
+        textViewEquipmentStatus = findViewById(R.id.text_view_status_detail);
         buttonDownloadManual = findViewById(R.id.button_download_manual);
         buttonGoToBooking = findViewById(R.id.button_go_to_booking);
         recyclerViewMaintenanceLogs = findViewById(R.id.recycler_view_maintenance_logs);
 
-        // 3. LẤY ID TỪ INTENT (SỬA LỖI Ở ĐÂY)
-        // Phải dùng getIntExtra vì ListActivity gửi 'int'
+        // Lấy ID
         equipmentId = getIntent().getIntExtra("EQUIPMENT_ID", -1);
-
         if (equipmentId == -1) {
-            // Đây chính là lỗi "Không tìm thấy ID"
-            Toast.makeText(this, "Lỗi: Không tìm thấy ID thiết bị", Toast.LENGTH_LONG).show();
-            finish(); // Đóng Activity
+            Toast.makeText(this, "Lỗi: Không tìm thấy ID", Toast.LENGTH_LONG).show();
+            finish();
             return;
         }
 
-        // 4. TẢI DỮ LIỆU TỪ DATABASE (THAY THẾ CODE CỨNG)
+        // Gọi Backend để lấy dữ liệu
         mViewModel.getEquipmentById(equipmentId).observe(this, new Observer<Equipment>() {
             @Override
             public void onChanged(Equipment equipment) {
-                // Khi Room tìm thấy dữ liệu, cập nhật UI
                 if (equipment != null) {
                     textViewEquipmentName.setText(equipment.getName());
                     textViewModel.setText("Model: " + equipment.getModel());
-
-                    // TODO: Cập nhật các trường này khi bạn thêm chúng vào model
-                    textViewSerial.setText("Serial #: US12345678");
-                    textViewEquipmentStatus.setText("Trạng thái: Sẵn sàng");
+                    // (Các trường khác)
                 }
             }
         });
 
-        // 5. Cài đặt các trình lắng nghe sự kiện
+        // SỬA 2 LỖI (ảnh image_7e4408.png)
         setupClickListeners();
-
-        // 6. Cài đặt RecyclerView cho Nhật ký
         setupLogRecyclerView();
     }
 
     private void setupClickListeners() {
-        // --- Nút Tải Hướng dẫn ---
-        buttonDownloadManual.setOnClickListener(v -> {
-            Toast.makeText(this, "Bắt đầu tải Hướng dẫn...", Toast.LENGTH_SHORT).show();
-            startManualDownload();
-        });
+        buttonDownloadManual.setOnClickListener(v -> startManualDownload());
 
-        // --- NÚT MỚI: Chuyển sang Màn hình Đặt lịch ---
         buttonGoToBooking.setOnClickListener(v -> {
             Intent intent = new Intent(EquipmentDetailActivity.this, EquipmentBookingActivity.class);
-            // Gửi ID (đã là int) sang màn hình Đặt lịch
             intent.putExtra("EQUIPMENT_ID", equipmentId);
             intent.putExtra("EQUIPMENT_NAME", textViewEquipmentName.getText().toString());
             startActivity(intent);
         });
     }
 
+    // ================================================================
+    // THÊM 2 HÀM BỊ THIẾU (Sửa lỗi 'image_7e4408.png')
+    // =================================D===============================
+
     private void setupLogRecyclerView() {
         recyclerViewMaintenanceLogs.setLayoutManager(new LinearLayoutManager(this));
-        // TODO: Cài đặt Adapter và load data
+        // TODO: Cài đặt Adapter và load data cho Log
+        // (Đây là nơi bạn sẽ tạo Adapter cho recycler_view_maintenance_logs)
     }
 
     private void startManualDownload() {
-        // ... (Hàm download giữ nguyên y như cũ) ...
         if (manualUrl == null || manualUrl.isEmpty()) {
             Toast.makeText(this, "Không tìm thấy URL tài liệu", Toast.LENGTH_SHORT).show();
             return;

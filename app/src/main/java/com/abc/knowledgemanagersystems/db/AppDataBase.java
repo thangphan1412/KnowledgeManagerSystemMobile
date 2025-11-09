@@ -8,12 +8,14 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+
 import com.abc.knowledgemanagersystems.config.DataConverter;
 // Import tất cả DAO
 import com.abc.knowledgemanagersystems.dao.EquipmentDao;
 import com.abc.knowledgemanagersystems.dao.ExperimentDao;
 import com.abc.knowledgemanagersystems.dao.ExperimentLogsDao;
-import com.abc.knowledgemanagersystems.dao.InventoryBookingDao;
+
+import com.abc.knowledgemanagersystems.dao.BookingDao;
 import com.abc.knowledgemanagersystems.dao.InventoryItemDao;
 import com.abc.knowledgemanagersystems.dao.InventoryLogDao;
 import com.abc.knowledgemanagersystems.dao.SopsDao;
@@ -55,7 +57,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract ExperimentLogsDao experimentLogsDao();
     public abstract InventoryLogDao inventoryLogDao();
     public abstract InventoryItemDao inventoryItemDao();
-    public abstract InventoryBookingDao inventoryBookingDao();
+    public abstract BookingDao bookingDao();
     public abstract SopsDao sopsDao();
     public abstract StepDao stepDao();
     public abstract UserDao userDao();
@@ -87,6 +89,7 @@ public abstract class AppDataBase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
+
 
             databaseWriteExecutor.execute(() -> {
                 // Lấy tất cả DAO cần thiết

@@ -46,7 +46,6 @@
             android:layout_height="wrap_content"
             android:text="Chọn giờ bắt đầu"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-
             android:textColor="#E09B9B"
             app:strokeColor="#E09B9B" />
 
@@ -56,7 +55,6 @@
             android:layout_height="wrap_content"
             android:text="Chọn giờ kết thúc"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-
             android:textColor="#E09B9B"
             app:strokeColor="#E09B9B" />
 
@@ -66,7 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Xác nhận Đặt lịch"
-
             android:backgroundTint="#E09B9B"
             android:textColor="@android:color/white" />
 

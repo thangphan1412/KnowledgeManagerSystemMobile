@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.abc.knowledgemanagersystems.model.Equipment;
-import com.abc.knowledgemanagersystems.repository.EquipmentRepository; // <-- Import
+import com.abc.knowledgemanagersystems.repository.EquipmentRepository;
 import java.util.List;
 
 public class EquipmentViewModel extends AndroidViewModel {
@@ -25,6 +25,6 @@ public class EquipmentViewModel extends AndroidViewModel {
 
     // THÊM HÀM NÀY (Bắt buộc)
     public LiveData<Equipment> getEquipmentById(int id) {
-        return mRepository.getEquipmentById(id); // <-- HÀM MÀ BẠN ĐANG BỊ LỖI
+        return mRepository.getEquipmentById(id);
     }
 }

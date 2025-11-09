@@ -1,113 +1,153 @@
 package com.abc.knowledgemanagersystems.controller;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.abc.knowledgemanagersystems.R;
+import com.abc.knowledgemanagersystems.model.Booking;
+import com.abc.knowledgemanagersystems.viewmodel.BookingViewModel;
 
 import java.util.Calendar;
+import java.util.concurrent.Future;
 
 public class EquipmentBookingActivity extends AppCompatActivity {
 
-    // --- Biến lưu trữ ---
-    private long equipmentId = -1;
-    private String equipmentName = "";
-    private int selectedStartHour = -1;
-    private int selectedStartMinute = -1;
-    private int selectedEndHour = -1;
-    private int selectedEndMinute = -1;
+    private TextView mHeaderText;
+    private CalendarView mCalendarView;
+    private Button mButtonBookNow, mButtonStartTime, mButtonEndTime;
 
-    // --- Views ---
-    private TextView textViewTitle;
-    private CalendarView calendarView;
-    private Button buttonPickStartTime;
-    private Button buttonPickEndTime;
-    private Button buttonBookNow;
+    private BookingViewModel mBookingViewModel;
+    private int mEquipmentId = -1;
+    private int mCurrentUserId = 1;
+
+    private Calendar mStartCalendar = Calendar.getInstance();
+    private Calendar mEndCalendar = Calendar.getInstance();
+    private Calendar mSelectedDay = Calendar.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipment_booking);
 
-        // 1. Nhận ID và Tên được gửi từ EquipmentDetailActivity
-        equipmentId = getIntent().getLongExtra("EQUIPMENT_ID", -1);
-        equipmentName = getIntent().getStringExtra("EQUIPMENT_NAME");
+        mHeaderText = findViewById(R.id.text_view_booking_title);
+        mCalendarView = findViewById(R.id.calendar_view);
+        mButtonStartTime = findViewById(R.id.button_pick_start_time);
+        mButtonEndTime = findViewById(R.id.button_pick_end_time);
+        mButtonBookNow = findViewById(R.id.button_book_now);
 
-        // 2. Ánh xạ Views
-        textViewTitle = findViewById(R.id.text_view_booking_title);
-        calendarView = findViewById(R.id.calendar_view);
-        buttonPickStartTime = findViewById(R.id.button_pick_start_time);
-        buttonPickEndTime = findViewById(R.id.button_pick_end_time);
-        buttonBookNow = findViewById(R.id.button_book_now);
+        mBookingViewModel = new ViewModelProvider(this).get(BookingViewModel.class);
 
-        // 3. Cập nhật tiêu đề
-        if (equipmentName != null && !equipmentName.isEmpty()) {
-            textViewTitle.setText("Đặt lịch cho: " + equipmentName);
-        }
+        Intent intent = getIntent();
+        mEquipmentId = intent.getIntExtra("EQUIPMENT_ID", -1);
+        String equipmentName = intent.getStringExtra("EQUIPMENT_NAME");
+        mHeaderText.setText("Đặt lịch cho: " + equipmentName);
 
-        // 4. Cài đặt listeners (Đây là code cũ từ EquipmentDetailActivity)
+        setupCalendar();
         setupClickListeners();
     }
 
+    private void setupCalendar() {
+        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                mSelectedDay.set(year, month, dayOfMonth);
+            }
+        });
+    }
+
     private void setupClickListeners() {
-        // --- Nút Chọn Giờ Bắt đầu ---
-        buttonPickStartTime.setOnClickListener(v -> {
-            final Calendar c = Calendar.getInstance();
-            int currentHour = c.get(Calendar.HOUR_OF_DAY);
-            int currentMinute = c.get(Calendar.MINUTE);
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    (view, hourOfDay, minute) -> {
-                        selectedStartHour = hourOfDay;
-                        selectedStartMinute = minute;
-                        String timeString = String.format(java.util.Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
-                        buttonPickStartTime.setText("Giờ bắt đầu: " + timeString);
-                    }, currentHour, currentMinute, true);
-            timePickerDialog.show();
-        });
+        mButtonStartTime.setOnClickListener(v -> showTimePicker(true));
+        mButtonEndTime.setOnClickListener(v -> showTimePicker(false));
 
-        // --- Nút Chọn Giờ Kết thúc ---
-        buttonPickEndTime.setOnClickListener(v -> {
-            final Calendar c = Calendar.getInstance();
-            int currentHour = c.get(Calendar.HOUR_OF_DAY);
-            int currentMinute = c.get(Calendar.MINUTE);
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    (view, hourOfDay, minute) -> {
-                        selectedEndHour = hourOfDay;
-                        selectedEndMinute = minute;
-                        String timeString = String.format(java.util.Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
-                        buttonPickEndTime.setText("Giờ kết thúc: " + timeString);
-                    }, currentHour, currentMinute, true);
-            timePickerDialog.show();
-        });
+        mButtonBookNow.setOnClickListener(v -> {
+            long startTime = combineDateAndTime(mSelectedDay, mStartCalendar).getTimeInMillis();
+            long endTime = combineDateAndTime(mSelectedDay, mEndCalendar).getTimeInMillis();
 
-        // --- Nút Xác nhận Đặt lịch ---
-        buttonBookNow.setOnClickListener(v -> {
-            if (selectedStartHour == -1 || selectedEndHour == -1) {
-                Toast.makeText(this, "Vui lòng chọn giờ bắt đầu và kết thúc", Toast.LENGTH_SHORT).show();
+            if (startTime >= endTime) {
+                Toast.makeText(this, "Giờ kết thúc phải sau giờ bắt đầu", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String startTime = String.format(java.util.Locale.getDefault(), "%02d:%02d", selectedStartHour, selectedStartMinute);
-            String endTime = String.format(java.util.Locale.getDefault(), "%02d:%02d", selectedEndHour, selectedEndMinute);
 
-            Toast.makeText(this, "Đã đặt lịch cho ID " + equipmentId + " từ " + startTime + " đến " + endTime, Toast.LENGTH_LONG).show();
+            Future<Boolean> conflictCheck = mBookingViewModel.hasConflict(mEquipmentId, startTime, endTime);
 
-            // TODO: Gửi thông tin này lên server/database
+            try {
+                if (conflictCheck.get()) {
+                    Toast.makeText(this, "Lỗi: Đã có người đặt trong thời gian này!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, "Lỗi khi kiểm tra lịch: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            // Đóng màn hình Đặt lịch và quay lại màn hình Chi tiết
+            Booking newBooking = new Booking();
+            newBooking.setEquipmentId(mEquipmentId);
+            newBooking.setUserId(mCurrentUserId);
+            newBooking.setStartTime(startTime);
+            newBooking.setEndTime(endTime);
+            newBooking.setStatus("CONFIRMED");
+
+            mBookingViewModel.insert(newBooking);
+            Toast.makeText(this, "Đã đặt lịch thành công!", Toast.LENGTH_SHORT).show();
             finish();
         });
+    }
 
-        // --- Lịch (CalendarView) ---
-        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-            String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-            Toast.makeText(this, "Ngày chọn: " + selectedDate, Toast.LENGTH_SHORT).show();
-        });
+    /**
+     * SỬA LỖI 1: Reset Giây (Second) và Miligiây (Millisecond)
+     */
+    private void showTimePicker(boolean isStartTime) {
+        Calendar cal = (isStartTime) ? mStartCalendar : mEndCalendar;
+
+        TimePickerDialog dialog = new TimePickerDialog(this,
+                (view, hourOfDay, minute) -> {
+                    cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    cal.set(Calendar.MINUTE, minute);
+
+                    // --- SỬA LỖI: Reset Giây và Miligiây ---
+                    cal.set(Calendar.SECOND, 0);
+                    cal.set(Calendar.MILLISECOND, 0);
+
+                    String time = String.format("%02d:%02d", hourOfDay, minute);
+                    if (isStartTime) {
+                        mButtonStartTime.setText("Bắt đầu: " + time);
+                    } else {
+                        mButtonEndTime.setText("Kết thúc: " + time);
+                    }
+                },
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                true // 24-hour format
+        );
+        dialog.show();
+    }
+
+    /**
+     * SỬA LỖI 2: Đảm bảo Miligiây (Millisecond) là 0
+     */
+    private Calendar combineDateAndTime(Calendar date, Calendar time) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(date.get(Calendar.YEAR),
+                date.get(Calendar.MONTH),
+                date.get(Calendar.DAY_OF_MONTH),
+                time.get(Calendar.HOUR_OF_DAY),
+                time.get(Calendar.MINUTE),
+                0); // <-- Set Giây (Second) = 0
+
+        // --- SỬA LỖI: Set Miligiây (Millisecond) = 0 ---
+        cal.set(Calendar.MILLISECOND, 0);
+
+        return cal;
     }
 }

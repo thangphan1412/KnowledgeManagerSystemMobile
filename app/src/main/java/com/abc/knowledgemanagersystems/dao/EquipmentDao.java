@@ -18,5 +18,5 @@ public interface EquipmentDao {
     LiveData<List<Equipment>> getAllEquipment();
 
     @Query("SELECT * FROM equipment WHERE equipment_id = :id")
-    LiveData<Equipment> getEquipmentById(int id); // <-- HÀM MÀ BẠN ĐANG BỊ LỖI
+    LiveData<Equipment> getEquipmentById(int id); // <-- Sửa lỗi 'getEquipmentById'
 }
