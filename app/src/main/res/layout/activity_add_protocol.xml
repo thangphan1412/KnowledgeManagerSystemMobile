@@ -211,6 +211,145 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <!-- File Path PDF Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@android:color/white">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@android:drawable/ic_menu_upload"
+                                app:tint="@color/pink_500"
+                                android:contentDescription="PDF icon"
+                                android:layout_marginEnd="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Protocol PDF File (Optional)"
+                                android:textSize="12sp"
+                                android:textColor="@color/pink_500"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnChooseFilePath"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Choose PDF File"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            app:cornerRadius="8dp"
+                            app:backgroundTint="@color/pink_500"
+                            app:icon="@android:drawable/ic_menu_upload"
+                            app:iconTint="@android:color/white"
+                            app:iconGravity="textStart"/>
+
+                        <TextView
+                            android:id="@+id/tvFilePathName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No file selected"
+                            android:textColor="#666666"
+                            android:textSize="13sp"
+                            android:textStyle="italic"
+                            android:layout_marginTop="8dp"
+                            android:padding="8dp"
+                            android:background="#F5F5F5"
+                            android:drawablePadding="8dp"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Safe Data Sheet PDF Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@android:color/white">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@android:drawable/ic_dialog_alert"
+                                app:tint="@color/pink_500"
+                                android:contentDescription="Safety icon"
+                                android:layout_marginEnd="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Safety Data Sheet PDF (Optional)"
+                                android:textSize="12sp"
+                                android:textColor="@color/pink_500"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnChooseSafeDataSheet"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Choose SDS PDF"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            app:cornerRadius="8dp"
+                            app:backgroundTint="@color/pink_500"
+                            app:icon="@android:drawable/ic_menu_upload"
+                            app:iconTint="@android:color/white"
+                            app:iconGravity="textStart"/>
+
+                        <TextView
+                            android:id="@+id/tvSafeDataSheetName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No file selected"
+                            android:textColor="#666666"
+                            android:textSize="13sp"
+                            android:textStyle="italic"
+                            android:layout_marginTop="8dp"
+                            android:padding="8dp"
+                            android:background="#F5F5F5"
+                            android:drawablePadding="8dp"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
                 <!-- Save Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSaveProtocol"
