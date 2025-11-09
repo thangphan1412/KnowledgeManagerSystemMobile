@@ -44,6 +44,8 @@ public class AdminUserController  extends AppCompatActivity {
         String username = binding.editTextNewUsername.getText().toString().trim();
         String email = binding.editTextNewEmail.getText().toString().trim();
         String password = binding.editTextNewPassword.getText().toString();
+        String address = binding.editTextNewAddress.getText().toString();
+        String numberphone  = binding.editTextNewPhone.getText().toString();
         int selectedPosition = binding.spinnerRole.getSelectedItemPosition();
         RoleName selectedRole = ROLE_MAPPING[selectedPosition];
 
@@ -74,6 +76,8 @@ public class AdminUserController  extends AppCompatActivity {
                          binding.editTextNewUsername.getText().toString().trim();
                          binding.editTextNewEmail.getText().toString().trim();
                          binding.editTextNewPassword.getText().toString();
+                        binding.editTextNewAddress.setText("");
+                        binding.editTextNewPhone.setText("");
                     } else {
                         // ... (Xử lý thất bại)
                         Toast.makeText(this, "Tạo thất bại: " + response.getMessage(), Toast.LENGTH_LONG).show();

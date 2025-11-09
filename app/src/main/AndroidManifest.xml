@@ -57,6 +57,9 @@
             android:exported="false" />
 
         <activity
+            android:name=".controller.UserProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.HomeActivity"
             android:exported="false" />
 

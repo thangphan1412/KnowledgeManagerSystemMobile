@@ -40,6 +40,8 @@ public class HomeActivity extends AppCompatActivity {
     private static final Class<?> EQUIPMENT_DETAIL_ACTIVITY = EquipmentDetailActivity.class;
     private static final Class<?> PROTOCOL_ACTIVITY = ProtocolActivity.class;
     private static final Class<?> ADMIN_USER_ACTIVITY = AdminUserController.class;
+    private static final Class<?> USER_PROFILE_ACTIVITY = UserProfileActivity.class;
+
 
 
     @Override
@@ -164,14 +166,14 @@ public class HomeActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_profile) {
-                Toast.makeText(HomeActivity.this, "Mở Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, USER_PROFILE_ACTIVITY));
 
             } else if (id == R.id.nav_team) {
                 // Phân quyền đã được xử lý bằng applyAuthorization(), chỉ cần Intent
                 startActivity(new Intent(HomeActivity.this, ADMIN_USER_ACTIVITY));
 
             } else if (id == R.id.nav_protocols) {
-                Toast.makeText(HomeActivity.this, "Phê duyệt Protocols", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, USER_PROFILE_ACTIVITY));
 
             } else if (id == R.id.nav_sds) {
                 startActivity(new Intent(HomeActivity.this, SOPS_ACTIVITY));

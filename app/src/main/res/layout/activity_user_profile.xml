@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    tools:context=".controller.UserProfileActivity">
+
+    <TextView
+        android:id="@+id/textViewProfileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thông Tin Hồ Sơ Người Dùng"
+        android:textColor="#333333"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfileTitle"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEditProfile">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView style="@style/ProfileLabelStyle" android:text="Tên người dùng (Username):" />
+            <TextView
+                android:id="@+id/textViewUsername"
+                style="@style/ProfileValueStyle"
+                tools:text="Tên đang tải..." />
+
+            <TextView style="@style/ProfileLabelStyle" android:text="Email:" />
+            <TextView
+                android:id="@+id/textViewEmail"
+                style="@style/ProfileValueStyle"
+                tools:text="Email đang tải..." />
+
+            <TextView style="@style/ProfileLabelStyle" android:text="Vai trò:" />
+            <TextView
+                android:id="@+id/textViewRole"
+                style="@style/ProfileValueStyle"
+                tools:text="Vai trò đang tải..." />
+
+            <TextView style="@style/ProfileLabelStyle" android:text="Số điện thoại:" />
+            <TextView
+                android:id="@+id/textViewPhone"
+                style="@style/ProfileValueStyle"
+                tools:text="Số điện thoại đang tải..." />
+
+            <TextView style="@style/ProfileLabelStyle" android:text="Địa chỉ:" />
+            <TextView
+                android:id="@+id/textViewAddress"
+                style="@style/ProfileValueStyle"
+                tools:text="Địa chỉ đang tải..." />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttonEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHỈNH SỬA HỒ SƠ"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
