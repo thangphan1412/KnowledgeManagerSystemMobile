@@ -52,11 +52,11 @@ public class EquipmentDetailActivity extends AppCompatActivity {
 
         mViewModel = new ViewModelProvider(this).get(EquipmentViewModel.class);
 
-<<<<<<< Updated upstream
+
         // KHỚP VỚI XML CỦA BẠN (Sửa 34 lỗi gạch đỏ)
-=======
+
         // Ánh xạ View
->>>>>>> Stashed changes
+
         textViewEquipmentName = findViewById(R.id.text_view_equipment_name);
         textViewModel = findViewById(R.id.text_view_model);
         textViewSerial = findViewById(R.id.text_view_serial);
