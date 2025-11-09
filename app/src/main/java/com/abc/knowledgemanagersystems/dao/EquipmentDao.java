@@ -11,7 +11,7 @@ import java.util.List; // <-- THÊM IMPORT
 public interface EquipmentDao {
 
     @Insert
-    void insert(Equipment equipment);
+    long insert(Equipment equipment);
 
     // THÊM 2 HÀM NÀY (Bắt buộc)
     @Query("SELECT * FROM equipment")

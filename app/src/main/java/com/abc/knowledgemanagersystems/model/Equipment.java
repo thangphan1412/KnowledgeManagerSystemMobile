@@ -41,5 +41,7 @@ public class Equipment {
     private int userId;
     @ColumnInfo(name = "inventorys_item_id")
     private int inventoryItemId;
+    @ColumnInfo(name = "manual_url")
+    private String manualUrl;
 
 }
