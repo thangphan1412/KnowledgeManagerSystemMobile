@@ -21,7 +21,7 @@ import java.util.concurrent.Future;
 import retrofit2.Response;
 
 public class LoginService {
-    private static final RoleName DEFAULT_ROLE = RoleName.RESEARCHER;
+//    private static final RoleName DEFAULT_ROLE = RoleName.RESEARCHER;
 
     private AuthPreferences authPreferences;
     private UserDao userDao;
@@ -99,7 +99,7 @@ public class LoginService {
      */
     public CreateUserResponse createRegularUser(CreateUserRequest request) throws ExecutionException, InterruptedException {
 
-        // 1. Kiểm tra email tồn tại trên luồng nền
+        // 1. Kiểm tra email tồn tại... (Giữ nguyên)
         Future<Users> checkFuture = AppDataBase.databaseWriteExecutor.submit(() ->
                 userDao.getUserByEmail(request.getEmail())
         );
@@ -108,14 +108,19 @@ public class LoginService {
             return new CreateUserResponse(false, "Email đã được sử dụng.");
         }
 
-        // 2. Tạo đối tượng Users (dùng mật khẩu Admin đã cung cấp)
+        // 2. Tạo đối tượng Users
         Users newUser = new Users();
         newUser.setEmail(request.getEmail());
-        newUser.setPassword(request.getPassword()); // 📢 Lưu mật khẩu Admin đã cung cấp
+        // (Lưu ý: Bạn nên HASH mật khẩu tại đây)
+        newUser.setPassword(request.getPassword());
         newUser.setUsername(request.getUsername());
-        newUser.setRoleName(DEFAULT_ROLE);
 
-        // 3. Chèn vào DB trên luồng nền
+        // ✅ SỬA LỖI: Sử dụng roleName từ Request. Nếu Request không cung cấp (null),
+        //             thì mặc định là RESEARCHER.
+        RoleName assignedRole = request.getRoleName() != null ? request.getRoleName() : RoleName.RESEARCHER;
+        newUser.setRoleName(assignedRole);
+
+        // 3. Chèn vào DB trên luồng nền... (Giữ nguyên)
         Future<?> insertFuture = AppDataBase.databaseWriteExecutor.submit(() ->
                 userDao.insert(newUser)
         );

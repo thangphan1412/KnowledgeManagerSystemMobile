@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KnowledgeManagerSystems</string>
+
+    <string-array name="role_options">
+        <item>MANAGER</item>
+        <item>RESEARCHER</item>
+        <item>TECHNICIAN</item>
+    </string-array>
 </resources>

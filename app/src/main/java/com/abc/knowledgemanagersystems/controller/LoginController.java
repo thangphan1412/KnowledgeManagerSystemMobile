@@ -26,7 +26,7 @@ public class LoginController extends AppCompatActivity {
 
         // Khởi tạo Service
         loginService = new LoginService(this);
-        // executorService = Executors.newSingleThreadExecutor(); // ❌ BỎ
+
 
         // Thiết lập sự kiện cho nút Đăng nhập
         binding.buttonLogin.setOnClickListener(v -> handleLogin());
@@ -69,7 +69,7 @@ public class LoginController extends AppCompatActivity {
             }
         });
 
-        // ❌ Bỏ khối executorService.execute(() -> { ... }) cũ
+
     }
 
     @Override

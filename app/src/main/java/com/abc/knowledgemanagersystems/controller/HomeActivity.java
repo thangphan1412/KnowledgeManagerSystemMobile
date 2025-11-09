@@ -39,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final Class<?> LOGIN_ACTIVITY = LoginController.class;
     private static final Class<?> EQUIPMENT_DETAIL_ACTIVITY = EquipmentDetailActivity.class;
     private static final Class<?> PROTOCOL_ACTIVITY = ProtocolActivity.class;
+    private static final Class<?> ADMIN_USER_ACTIVITY = AdminUserController.class;
 
 
     @Override
@@ -167,7 +168,7 @@ public class HomeActivity extends AppCompatActivity {
 
             } else if (id == R.id.nav_team) {
                 // Phân quyền đã được xử lý bằng applyAuthorization(), chỉ cần Intent
-                startActivity(new Intent(HomeActivity.this, EQUIPMENT_DETAIL_ACTIVITY));
+                startActivity(new Intent(HomeActivity.this, ADMIN_USER_ACTIVITY));
 
             } else if (id == R.id.nav_protocols) {
                 Toast.makeText(HomeActivity.this, "Phê duyệt Protocols", Toast.LENGTH_SHORT).show();
@@ -230,7 +231,7 @@ public class HomeActivity extends AppCompatActivity {
         // 3. Truy vấn dữ liệu người dùng (Giả sử bạn có DatabaseHelper)
 
         // Lấy Email từ AuthPreferences (dữ liệu thường được lưu sau đăng nhập)
-        String userEmail = authPreferences.getRole(); // Giả định AuthPreferences có phương thức này
+        String userEmail = authPreferences.getUserEmail(); // Giả định AuthPreferences có phương thức này
 
         // ---  LOGIC LẤY TÊN TỪ SQLITE BẮT ĐẦU ---
 

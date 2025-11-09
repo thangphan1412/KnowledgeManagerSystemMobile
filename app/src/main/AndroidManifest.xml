@@ -30,6 +30,12 @@
 
 
         </activity>
+        <activity
+            android:name=".controller.AdminUserController"
+            android:exported="false"
+            android:label="Tạo Tài Khoản Người Dùng Mới"
+            />
+
 
         <activity
             android:name=".controller.LoginController"

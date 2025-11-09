@@ -40,10 +40,10 @@ public class EquipmentDetailActivity extends AppCompatActivity {
         mViewModel = new ViewModelProvider(this).get(EquipmentViewModel.class);
 
         // KHỚP VỚI XML CỦA BẠN (Sửa 34 lỗi gạch đỏ)
-        textViewEquipmentName = findViewById(R.id.text_view_equipment_name_detail);
-        textViewModel = findViewById(R.id.text_view_equipment_model_detail);
-        textViewSerial = findViewById(R.id.text_view_serial_detail);
-        textViewEquipmentStatus = findViewById(R.id.text_view_status_detail);
+        textViewEquipmentName = findViewById(R.id.text_view_equipment_name);
+        textViewModel = findViewById(R.id.text_view_model);
+        textViewSerial = findViewById(R.id.text_view_serial);
+        textViewEquipmentStatus = findViewById(R.id.text_view_equipment_status);
         buttonDownloadManual = findViewById(R.id.button_download_manual);
         buttonGoToBooking = findViewById(R.id.button_go_to_booking);
         recyclerViewMaintenanceLogs = findViewById(R.id.recycler_view_maintenance_logs);
