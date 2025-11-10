@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Các item của menu nằm ở đây -->
+    <!-- Ví dụ, dòng 7 có thể trông như thế này -->
     <item
         android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
         android:title="Search"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+        app:showAsAction="ifRoom" />  <!-- Lỗi xảy ra vì app:showAsAction -->
 
-    <item
-        android:id="@+id/action_scan_barcode"
-        android:title="Scan"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_barcode_scanner" />
 </menu>
