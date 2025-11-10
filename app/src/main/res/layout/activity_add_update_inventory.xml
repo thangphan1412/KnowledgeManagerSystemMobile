@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_close"
-            app:title="Cập nhật Kho" />
+            app:title="Add/Update Inventory" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,7 +37,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Tên Vật tư (ví dụ: Ethanol 99%)">
+                android:hint="Name(e.g. Ethanol 99%)">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_item_name"
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Công thức (ví dụ: C2H5OH)">
+                android:hint="Formula * (e.g. C2H5OH)">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_formula"
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Vị trí (ví dụ: Tủ A, Ngăn 2)">
+                android:hint="Location (e.g. Tủ A, Ngăn 2)">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_location"
@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Ngày hết hạn (HSD)">
+                android:hint="Expiry Date (HSD)">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_expiry_date"
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Trạng thái">
+                android:hint="Status *">
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner_status"
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Cập nhật số lượng:"
+                android:text="Update Quantity:"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
             <!-- 🔥 ĐÃ THÊM: Hiển thị số lượng hiện tại -->
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                tools:text="Hiện có: 1000 mL" />
+                tools:text="Available: 1000 mL" />
 
             <!-- Số lượng Check In / Check Out -->
             <LinearLayout
@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:layout_marginEnd="8dp"
-                    android:hint="Số lượng để thay đổi (+/-)"> <!-- 🔥 ĐÃ SỬA HINT -->
+                    android:hint="Amount to change (+/-)"> <!-- 🔥 ĐÃ SỬA HINT -->
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edit_text_quantity"
@@ -164,7 +164,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:hint="Đơn vị">
+                    android:hint="Unit">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edit_text_units"
@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
-                    android:text="Xuất Kho (-)"
+                    android:text="Check out (-)"
                     app:icon="@drawable/ic_remove"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -199,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:text="Nhập Kho (+)"
+                    android:text="Check in (+)"
                     app:icon="@drawable/ic_add"/>
 
             </LinearLayout>

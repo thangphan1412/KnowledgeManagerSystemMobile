@@ -56,17 +56,22 @@ public class SopsAdapter extends RecyclerView.Adapter<SopsAdapter.SopViewHolder>
     // Search filter logic
     public void filter(String query) {
         filteredList.clear();
+        if (query == null) query = "";
+
         if (query.isEmpty()) {
             filteredList.addAll(sopsList);
         } else {
+            String lowerQuery = query.toLowerCase();
             for (Sops sop : sopsList) {
-                if (sop.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                String title = sop.getTitle() != null ? sop.getTitle().toLowerCase() : "";
+                if (title.contains(lowerQuery)) {
                     filteredList.add(sop);
                 }
             }
         }
         notifyDataSetChanged();
     }
+
 
     public static class SopViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle, txtVersion;

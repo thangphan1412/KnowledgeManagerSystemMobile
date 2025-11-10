@@ -158,6 +158,21 @@ public class AddNewProtocolActivity extends AppCompatActivity {
         String title = edtTitle.getText().toString().trim();
         String description = edtDescription.getText().toString().trim();
 
+        if (sopsName.isEmpty()) {
+            Toast.makeText(this, "Please enter SOP name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (title.isEmpty()) {
+            Toast.makeText(this, "Please enter SOP title", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (description.isEmpty()) {
+            Toast.makeText(this, "Please enter SOP description", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (sopsName.isEmpty() || title.isEmpty() || selectedExperimentId == -1) {
             Toast.makeText(this, "Please fill all fields and select an experiment!", Toast.LENGTH_SHORT).show();
             return;

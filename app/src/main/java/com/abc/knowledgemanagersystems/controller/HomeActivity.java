@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final Class<?> EXPERIMENT_ACTIVITY = CreateExperimentActivity.class;
     private static final Class<?> HOME_ACTIVITY = HomeActivity.class;
     private static final Class<?> EQUIPMENT_ACTIVITY = EquipmentListActivity.class;
-//    private static final Class<?> INVENTORY_ACTIVITY = InventoryActivity.class;
+    private static final Class<?> INVENTORY_ACTIVITY = InventoryManagementActivity.class;
     private static final Class<?> SOPS_ACTIVITY = SDSLookupActivity.class;
     private static final Class<?> LOGIN_ACTIVITY = LoginController.class;
     private static final Class<?> EQUIPMENT_DETAIL_ACTIVITY = EquipmentDetailActivity.class;
@@ -131,11 +131,11 @@ public class HomeActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_equipment) {
                 startActivity(new Intent(HomeActivity.this, EQUIPMENT_ACTIVITY));
                 return true;
-//            }
-//            else if (itemId == R.id.navigation_inventory) {
-//                // Giả định có InventoryActivity
-//                startActivity(new Intent(HomeActivity.this, INVENTORY_ACTIVITY));
-//                return true;
+            }
+            else if (itemId == R.id.navigation_inventory) {
+                // Giả định có InventoryActivity
+                startActivity(new Intent(HomeActivity.this, INVENTORY_ACTIVITY));
+                return true;
             } else if (itemId == R.id.navigation_sops) {
                 startActivity(new Intent(HomeActivity.this, PROTOCOL_ACTIVITY));
                 return true;

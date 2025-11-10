@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.abc.knowledgemanagersystems.model.Sops;
 import com.abc.knowledgemanagersystems.model.Users;
 import com.abc.knowledgemanagersystems.status.RoleName;
 import com.abc.knowledgemanagersystems.status.StatusExperiment;
+import com.abc.knowledgemanagersystems.utils.SessionManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -38,6 +40,8 @@ public class ProtocolActivity extends AppCompatActivity {
     private SopsAdapter adapter;
     private ImageButton btnBack;
 
+    private SessionManager sessionManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,17 @@ public class ProtocolActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // 🔹 Khởi tạo SessionManager
+        sessionManager = new SessionManager(this);
+
+        // 🔹 Kiểm tra role và hiển thị FAB nếu là MANAGER hoặc ADMIN
+        RoleName role = sessionManager.getRole();
+        if (role == RoleName.MANAGER || role.name().equalsIgnoreCase("ADMIN")) {
+            fabAdd.show();
+        } else {
+            fabAdd.hide();
+        }
 
 //         Load data from Room database
         Executors.newSingleThreadExecutor().execute(() -> {
@@ -112,12 +127,15 @@ public class ProtocolActivity extends AppCompatActivity {
             }
         });
 
+        // 🔹 FAB click: chỉ cho MANAGER hoặc ADMIN
         fabAdd.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddNewProtocolActivity.class);
-            startActivity(intent);
+            RoleName clickRole = sessionManager.getRole();
+            if (clickRole == RoleName.MANAGER || clickRole.name().equalsIgnoreCase("ADMIN")) {
+                Intent intent = new Intent(this, AddNewProtocolActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "You do not have permission to add new protocols", Toast.LENGTH_SHORT).show();
+            }
         });
-
-
-
     }
 }

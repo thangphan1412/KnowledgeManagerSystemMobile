@@ -96,6 +96,12 @@
             android:exported="true"
             android:label="SDS Lookup" />
 
+        <activity android:name=".controller.AddUpdateInventoryActivity"
+            android:exported="true"/>
+
+        <activity android:name=".controller.InventoryManagementActivity"
+            android:exported="true" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

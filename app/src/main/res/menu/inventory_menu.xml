@@ -10,7 +10,6 @@
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
-    <!-- Mục 2: Quét mã vạch (Icon) -->
     <item
         android:id="@+id/action_scan_barcode"
         android:title="Scan"
