@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.InventoryManagementActivity">
+
+    <!-- Thanh công cụ (Toolbar) ở trên cùng -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_inventory"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.AppCompat.DayNight"
+            app:title="Quản lý Kho"
+            app:layout_scrollFlags="scroll|enterAlways|snap" >
+
+            <!--
+                Phần Menu cho Toolbar (Search và Scan).
+                Bạn sẽ cần tạo một tệp menu (res/menu/inventory_menu.xml)
+                và thêm 2 item này vào:
+
+            <item
+                android:id="@+id/action_search"
+                android:title="Search"
+                app:showAsAction="ifRoom|collapseActionView"
+                app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+            <item
+                android:id="@+id/action_scan_barcode"
+                android:title="Scan"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_barcode_scanner" />
+            -->
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--
+        Danh sách cuộn (RecyclerView)
+        Hiển thị tất cả vật tư trong kho.
+    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_inventory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_inventory" />
+
+    <!--
+        Nút "Thêm mới" vật tư
+        Sẽ mở Activity 'activity_add_update_inventory'
+    -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_inventory_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Thêm vật tư mới"
+        app:srcCompat="@drawable/ic_add" />
+    <!-- Bạn cần thêm icon 'ic_add' (dấu cộng) vào drawable -->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

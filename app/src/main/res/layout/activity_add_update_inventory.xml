@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.AddUpdateInventoryActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_add_item"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_close"
+            app:title="Cập nhật Kho" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Tên Vật tư -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_item_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tên Vật tư (ví dụ: Ethanol 99%)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 🔥 ĐÃ XÓA: Trường "Số Lô" (Lot Number) đã bị xóa vì không có trong Model -->
+
+            <!-- 🔥 ĐÃ THÊM: Trường "Công thức" (Formula) từ Model -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_formula"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Công thức (ví dụ: C2H5OH)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_formula"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Vị trí -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_location"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Vị trí (ví dụ: Tủ A, Ngăn 2)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Ngày hết hạn (Dùng DatePicker) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_expiry_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Ngày hết hạn (HSD)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_expiry_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_calendar_expiry"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 🔥 ĐÃ THÊM: Trường "Trạng thái" (Status) từ Model -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_status"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Trạng thái">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Cập nhật số lượng:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+            <!-- 🔥 ĐÃ THÊM: Hiển thị số lượng hiện tại -->
+            <TextView
+                android:id="@+id/text_view_current_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                tools:text="Hiện có: 1000 mL" />
+
+            <!-- Số lượng Check In / Check Out -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:baselineAligned="false">
+
+                <!-- Số lượng (ví dụ: 100) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_quantity"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_marginEnd="8dp"
+                    android:hint="Số lượng để thay đổi (+/-)"> <!-- 🔥 ĐÃ SỬA HINT -->
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_quantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Đơn vị (ví dụ: mL) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_units"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:hint="Đơn vị">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_units"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="mL"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <!-- Nút Check In (Nhập) và Check Out (Xuất) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_check_out"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Xuất Kho (-)"
+                    app:icon="@drawable/ic_remove"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_check_in"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Nhập Kho (+)"
+                    app:icon="@drawable/ic_add"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
