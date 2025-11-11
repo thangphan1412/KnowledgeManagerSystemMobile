@@ -123,7 +123,12 @@ public class AddUpdateInventoryActivity extends AppCompatActivity {
                     edtFormula.setText(currentItem.getFormula());
                     edtLocation.setText(currentItem.getLocation());
                     edtExpiryDate.setText(currentItem.getExpiredDate());
-                    spinnerStatus.setText(currentItem.getStatusInventoryItem().toString(), false);
+
+                    StatusInventoryItem status = currentItem.getStatusInventoryItem() != null
+                            ? currentItem.getStatusInventoryItem()
+                            : StatusInventoryItem.Available;
+                    spinnerStatus.setText(status.toString(), false);
+
                     edtUnits.setText(currentItem.getUnits());
                     tvCurrentQuantity.setText("Hiện có: " + currentItem.getQuantity() + " " + currentItem.getUnits());
                 });
