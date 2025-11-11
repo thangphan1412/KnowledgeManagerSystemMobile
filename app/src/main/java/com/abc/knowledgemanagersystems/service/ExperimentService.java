@@ -1,40 +1,23 @@
 package com.abc.knowledgemanagersystems.service;
 
-import com.abc.knowledgemanagersystems.model.Experiment;
-import com.abc.knowledgemanagersystems.model.Sops;
-import com.abc.knowledgemanagersystems.repository.ExperimentRepository;
+import android.content.Context;
 
-import java.util.List;
+import com.abc.knowledgemanagersystems.dao.ExperimentDao;
+import com.abc.knowledgemanagersystems.db.AppDataBase;
+import com.abc.knowledgemanagersystems.model.Experiment;
 
 public class ExperimentService {
-    private final ExperimentRepository repository;
-
-    public ExperimentService(ExperimentRepository repository) {
-        this.repository = repository;
+    private final ExperimentDao experimentDao;
+    public ExperimentService(Context context) {
+        AppDataBase db = AppDataBase.getInstance(context);
+        experimentDao = db.experimentDao();
     }
 
-
-    public List<Sops> getAvailableSops() {
-
-        return repository.getAllSops();
-    }
-
-
-    public long createAndSyncNewExperiment(Experiment experiment) {
-
-        long localId = repository.insertExperimentLocal(experiment);
-
-
-        try {
-            String serverId = "EXP-SVR-" + localId;
-            repository.updateSyncStatus((int)localId, serverId);
-
-        } catch (Exception e) {
-
-            System.err.println("Lỗi đồng bộ server cho ID cục bộ " + localId + ": " + e.getMessage());
-        }
-
-
-        return localId;
+    /**
+     * Lưu Experiment vào DB và trả về ID mới.
+     * Cần được gọi từ luồng nền (ExecutorService).
+     */
+    public long insertExperiment(Experiment experiment) {
+        return experimentDao.insert(experiment);
     }
 }

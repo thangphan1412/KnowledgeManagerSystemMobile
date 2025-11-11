@@ -25,6 +25,14 @@ public class ExperimentRepository {
         return experimentDao.insert(experiment);
     }
 
+    /**
+     * ✅ PHƯƠNG THỨC BỊ THIẾU ĐÃ ĐƯỢC THÊM
+     * Gọi từ DAO để lấy danh sách thí nghiệm theo ID người dùng
+     */
+    public List<Experiment> getExperimentsByUserId(int userId) {
+        return experimentDao.getExperimentsByUserId(userId);
+    }
+
 
     public List<Sops> getAllSops() {
         return sopsDao.getAllSops();

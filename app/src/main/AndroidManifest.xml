@@ -76,7 +76,9 @@
         <activity
             android:name=".controller.HomeActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".controller.ExperimentListActivity"
+            android:exported="false" />
         <activity
             android:name=".controller.EquipmentDetailActivity"
             android:exported="false"
