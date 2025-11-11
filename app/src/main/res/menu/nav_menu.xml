@@ -30,10 +30,10 @@
             android:icon="@drawable/ic_help"
             android:title="Help/Support" />
 
-        <item
-            android:id="@+id/nav_app"
-            android:icon="@drawable/ic_about_app"
-            android:title="About app" />
+<!--        <item-->
+<!--            android:id="@+id/nav_app"-->
+<!--            android:icon="@drawable/ic_about_app"-->
+<!--            android:title="About app" />-->
 
         <item
             android:id="@+id/nav_Logout"

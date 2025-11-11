@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    tools:context=".controller.HelpSupportActivity"> <!-- (Tên Activity mới bạn sẽ tạo) -->
+
+    <!-- Thanh công cụ (Toolbar) -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_help_support"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Trợ giúp và Hỗ trợ" />
+        <!-- Bạn sẽ cần icon ic_arrow_back.xml -->
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Thẻ 1: Câu hỏi thường gặp (FAQs) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Câu hỏi thường gặp (FAQs)"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:drawableStart="@drawable/ic_faq"
+                        android:drawablePadding="12dp"
+                        android:gravity="center_vertical"/>
+                    <!-- Bạn sẽ cần icon ic_faq.xml -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Hỏi: Làm thế nào để đặt lịch thiết bị?"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Đáp: Đi tới tab 'Thiết bị', chọn thiết bị bạn muốn, và nhấn vào nút 'Đặt lịch thiết bị này'."
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Hỏi: Làm thế nào để báo cáo sự cố?"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Đáp: Vui lòng liên hệ Kỹ Thuật Viên Lab qua email tech@lab.com (mục 'Liên hệ Hỗ trợ' bên dưới)."
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Thẻ 2: Liên hệ Hỗ trợ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Liên hệ Hỗ trợ"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:drawableStart="@drawable/ic_contact_support"
+                        android:drawablePadding="12dp"
+                        android:gravity="center_vertical"/>
+                    <!-- Bạn sẽ cần icon ic_contact_support.xml -->
+
+                    <TextView
+                        android:id="@+id/text_contact_admin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Quản lý Hệ thống: admin@lab.com"
+                        android:autoLink="email"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+                    <TextView
+                        android:id="@+id/text_contact_tech"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Kỹ thuật viên Lab: tech@lab.com"
+                        android:autoLink="email"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Thẻ 3: Hướng dẫn sử dụng -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hướng dẫn sử dụng Ứng dụng"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:drawableStart="@drawable/ic_user_guide"
+                        android:drawablePadding="12dp"
+                        android:gravity="center_vertical"/>
+                    <!-- Bạn sẽ cần icon ic_user_guide.xml -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Tải về tệp PDF hướng dẫn đầy đủ về cách sử dụng tất cả các tính năng của ứng dụng LKMS."
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_download_user_guide"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:icon="@drawable/ic_export_pdf"
+                        android:text="Tải Hướng dẫn (PDF)" />
+                    <!-- (Bạn đã có icon ic_export_pdf.xml) -->
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

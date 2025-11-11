@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final Class<?> USER_PROFILE_ACTIVITY = UserProfileActivity.class;
     private static final Class<?> INVENTORY_ACTIVITY = InventoryManagementActivity.class;
 
-
+    private static final Class<?> HELP_SUPPORT_ACTIVITY = HelpSupportActivity.class;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Mở SDS Lookup", Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.nav_setting) {
-                startActivity(new Intent(HomeActivity.this, PROTOCOL_ACTIVITY));
+                startActivity(new Intent(HomeActivity.this, HELP_SUPPORT_ACTIVITY));
             } else if(id == R.id.nav_Logout){
 
                 authPreferences.clearAuthData();
