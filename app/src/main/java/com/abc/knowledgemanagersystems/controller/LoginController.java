@@ -34,7 +34,7 @@ public class LoginController extends AppCompatActivity {
 
     private void handleLogin() {
         String email = binding.editTextUserIdEmail.getText().toString().trim();
-        String password = binding.editTextPassword.getText().toString();
+        String password = binding.editTextPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập Email và Mật khẩu.", Toast.LENGTH_SHORT).show();
@@ -48,13 +48,21 @@ public class LoginController extends AppCompatActivity {
         loginService.authenticate(email, password, new LoginService.AuthCallback() {
             @Override
             public void onSuccess(LoginResponse response) {
-                // Chuyển về luồng UI để cập nhật giao diện
                 runOnUiThread(() -> {
-                    Toast.makeText(LoginController.this, "Đăng nhập thành công! Vai trò: " + response.getRole(), Toast.LENGTH_LONG).show();
+                    // ✅ BƯỚC 1: Thông báo thành công (Tùy chọn)
+                    Toast.makeText(LoginController.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-                    // Chuyển sang màn hình chính
+                    // ✅ BƯỚC 2: TẠO INTENT CHUYỂN HƯỚNG
                     Intent intent = new Intent(LoginController.this, HomeActivity.class);
+
+                    // ✅ BƯỚC 3: DỌN DẸP ACTIVITY STACK (RẤT QUAN TRỌNG)
+                    // Đảm bảo LoginController bị đóng và không thể quay lại
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                    // ✅ BƯỚC 4: THỰC THI CHUYỂN HƯỚNG
                     startActivity(intent);
+
+                    // ✅ BƯỚC 5: KẾT THÚC LOGIN CONTROLLER
                     finish();
                 });
             }

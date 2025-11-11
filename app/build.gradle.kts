@@ -65,7 +65,7 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 
-
+    implementation("com.auth0.android:jwtdecode:2.0.2")
     // Unit test
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

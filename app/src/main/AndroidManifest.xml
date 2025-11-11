@@ -66,6 +66,9 @@
         <activity
             android:name=".controller.CreateExperimentActivity"
             android:exported="false" />
+        <activity
+            android:name=".controller.ViewExperimentActivity"
+            android:exported="false" />
 
         <activity
             android:name=".controller.UserProfileActivity"
@@ -90,6 +93,8 @@
             android:label="Add New Protocol" />
 
         <activity android:name=".controller.ViewProtocolActivity"
+            android:exported="true"/>
+        <activity android:name=".controller.ExperimentActivity"
             android:exported="true"/>
 
         <activity android:name=".controller.SDSLookupActivity"

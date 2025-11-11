@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu; // 📢 Cần Import Menu
+import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,14 +34,13 @@ public class HomeActivity extends AppCompatActivity {
     private static final Class<?> EXPERIMENT_ACTIVITY = CreateExperimentActivity.class;
     private static final Class<?> HOME_ACTIVITY = HomeActivity.class;
     private static final Class<?> EQUIPMENT_ACTIVITY = EquipmentListActivity.class;
-    private static final Class<?> INVENTORY_ACTIVITY = InventoryManagementActivity.class;
     private static final Class<?> SOPS_ACTIVITY = SDSLookupActivity.class;
     private static final Class<?> LOGIN_ACTIVITY = LoginController.class;
     private static final Class<?> EQUIPMENT_DETAIL_ACTIVITY = EquipmentDetailActivity.class;
     private static final Class<?> PROTOCOL_ACTIVITY = ProtocolActivity.class;
     private static final Class<?> ADMIN_USER_ACTIVITY = AdminUserController.class;
     private static final Class<?> USER_PROFILE_ACTIVITY = UserProfileActivity.class;
-
+    private static final Class<?> INVENTORY_ACTIVITY = InventoryManagementActivity.class;
 
 
     @Override
@@ -73,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         setupOnBackPressed();
     }
 
-    // --- CÁC PHƯƠNG THỨC XỬ LÝ CHỨC NĂNG ---
+    // ------------------- CÁC PHƯƠNG THỨC XỬ LÝ CHỨC NĂNG -------------------
 
     /**
      * Phương thức MỚI: Áp dụng phân quyền cho cả Drawer và Bottom Nav.
@@ -81,10 +80,9 @@ public class HomeActivity extends AppCompatActivity {
     private void applyAuthorization() {
         // Lấy vai trò của người dùng hiện tại
         String userRole = authPreferences.getRole();
-
+        if (userRole == null) userRole = "";
 
         // 1. Phân quyền cho Navigation Drawer (Menu bên hông)
-
         Menu drawerMenu = navigationView.getMenu();
 
         // Mặc định ẩn các mục yêu cầu quyền đặc biệt (dựa trên file XML của Drawer)
@@ -96,16 +94,8 @@ public class HomeActivity extends AppCompatActivity {
             drawerMenu.findItem(R.id.nav_protocols).setVisible(true);
         }
 
-        // -----------------------------------------------------------------
         // 2. Phân quyền cho Bottom Navigation View (Thanh footer)
-        // -----------------------------------------------------------------
-        Menu bottomMenu = bottomNavigationView.getMenu();
-
-        // Ví dụ: Giả sử mọi người đều thấy 5 mục. Nếu bạn muốn ẩn 1 mục (ví dụ: SOPs)
-        // đối với vai trò Researcher, bạn sẽ làm như sau:
-        // if (userRole.equals("RESEARCHER")) {
-        //     bottomMenu.findItem(R.id.navigation_sops).setVisible(false);
-        // }
+        // (Nếu cần thêm logic ẩn/hiện cho Bottom Nav, thêm ở đây)
     }
 
 
@@ -131,8 +121,7 @@ public class HomeActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_equipment) {
                 startActivity(new Intent(HomeActivity.this, EQUIPMENT_ACTIVITY));
                 return true;
-            }
-            else if (itemId == R.id.navigation_inventory) {
+            } else if (itemId == R.id.navigation_inventory) {
                 // Giả định có InventoryActivity
                 startActivity(new Intent(HomeActivity.this, INVENTORY_ACTIVITY));
                 return true;
@@ -173,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, ADMIN_USER_ACTIVITY));
 
             } else if (id == R.id.nav_protocols) {
-                startActivity(new Intent(HomeActivity.this, USER_PROFILE_ACTIVITY));
+                startActivity(new Intent(HomeActivity.this, PROTOCOL_ACTIVITY)); // Đã sửa Intent đích
 
             } else if (id == R.id.nav_sds) {
                 startActivity(new Intent(HomeActivity.this, SOPS_ACTIVITY));
@@ -222,6 +211,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Cập nhật thông tin người dùng trên Navigation Drawer Header.
+     */
     private void updateNavHeader() {
         // 1. Lấy View của Header (index 0 vì thường chỉ có 1 header)
         View headerView = navigationView.getHeaderView(0);
@@ -230,35 +223,19 @@ public class HomeActivity extends AppCompatActivity {
         TextView userNameTextView = headerView.findViewById(R.id.nav_header_username);
         TextView emailTextView = headerView.findViewById(R.id.nav_header_email);
 
-        // 3. Truy vấn dữ liệu người dùng (Giả sử bạn có DatabaseHelper)
-
-        // Lấy Email từ AuthPreferences (dữ liệu thường được lưu sau đăng nhập)
-        String userEmail = authPreferences.getUserEmail(); // Giả định AuthPreferences có phương thức này
-
-        // ---  LOGIC LẤY TÊN TỪ SQLITE BẮT ĐẦU ---
-
-        // Giả định bạn có một Helper để truy vấn DB
-        // DatabaseHelper dbHelper = new DatabaseHelper(this);
-        // User currentUser = dbHelper.getUserByEmail(userEmail);
-
-        // Để kiểm tra, chúng ta sẽ dùng dữ liệu giả lập trước:
+        // 3. Truy vấn dữ liệu người dùng
+        String userEmail = authPreferences.getUserEmail();
         String fullName = "User Name Loading...";
 
         if (userEmail != null && !userEmail.isEmpty()) {
             // Thay thế bằng logic truy vấn DB thực tế của bạn
-            // if (currentUser != null) {
-            //     fullName = currentUser.fullName;
-            // }
-
             // Hiện tại, gán tên giả để kiểm tra:
-            if (userEmail.contains("admin")) {
-                fullName = "Admin Hệ Thống";
+            if (userEmail.contains("admin") || (authPreferences.getRole() != null && authPreferences.getRole().equals("MANAGER"))) {
+                fullName = "Admin/Manager";
             } else {
                 fullName = "Nhà Nghiên Cứu";
             }
         }
-
-        // --- LOGIC LẤY TÊN TỪ SQLITE KẾT THÚC ---
 
         // 4. Cập nhật giao diện
         userNameTextView.setText(fullName);

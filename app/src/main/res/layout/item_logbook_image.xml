@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewImageTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:text="10:45 AM, 01/11/2025"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/material_dynamic_primary40"
+            android:text="[Tệp đính kèm: HÌNH ẢNH]"/>
+
+        <ImageView
+            android:id="@+id/imageViewUploaded"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+             /> <TextView
+        android:id="@+id/textViewImageCaption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="14sp"
+        android:text="Chú thích: Hình ảnh mẫu vật dưới kính hiển vi sau 15 phút ủ."/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

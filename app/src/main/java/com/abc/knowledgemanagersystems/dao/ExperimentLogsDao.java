@@ -15,4 +15,6 @@ public interface ExperimentLogsDao {
 
     @Query("SELECT * FROM experiments_logs")
     List<ExperimentLogs> getAllExperiments();
+    @Query("SELECT * FROM experiments_logs WHERE experiments_id = :experimentId ORDER BY logDate DESC")
+    List<ExperimentLogs> getLogEntriesByExperimentId(int experimentId);
 }

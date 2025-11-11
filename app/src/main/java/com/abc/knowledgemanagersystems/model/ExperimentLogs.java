@@ -7,6 +7,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.abc.knowledgemanagersystems.status.LogEntryType;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -51,4 +53,15 @@ public class ExperimentLogs {
     @ColumnInfo(name = "experiments_id")
     private int experimentId;
 
+
+    @ColumnInfo(name = "log_type")
+    private LogEntryType logType;
+
+
+    @ColumnInfo(name = "content")
+    private String content;
+
+
+    @ColumnInfo(name = "file_name")
+    private String fileName;
 }

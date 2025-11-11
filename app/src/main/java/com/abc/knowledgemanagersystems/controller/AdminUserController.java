@@ -43,9 +43,9 @@ public class AdminUserController  extends AppCompatActivity {
     private void handleCreateUser() {
         String username = binding.editTextNewUsername.getText().toString().trim();
         String email = binding.editTextNewEmail.getText().toString().trim();
-        String password = binding.editTextNewPassword.getText().toString();
-        String address = binding.editTextNewAddress.getText().toString();
-        String numberphone  = binding.editTextNewPhone.getText().toString();
+        String password = binding.editTextNewPassword.getText().toString().trim();
+        String address = binding.editTextNewAddress.getText().toString().trim();
+        String numberphone  = binding.editTextNewPhone.getText().toString().trim();
         int selectedPosition = binding.spinnerRole.getSelectedItemPosition();
         RoleName selectedRole = ROLE_MAPPING[selectedPosition];
 

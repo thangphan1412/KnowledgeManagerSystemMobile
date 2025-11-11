@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.ViewExperimentActivity"> <!-- (Bạn có thể cần đổi tên Activity này) -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_view_experiment_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            tools:text="Thí nghiệm Phân tích Protein" />
+
+        <TextView
+            android:id="@+id/text_view_experiment_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textStyle="bold"
+            tools:text="Trạng thái: COMPLETED" />
+
+        <TextView
+            android:id="@+id/text_view_experiment_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            tools:text="Ngày: 10/10/2025 - 11/10/2025" />
+
+        <!-- 🔥 NÚT EXPORT MỚI ĐƯỢC THÊM VÀO -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_export_pdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Export Báo cáo (PDF)"
+            app:icon="@drawable/ic_export_pdf"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Chi tiết Thí nghiệm"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <!-- (Bạn có thể thêm RecyclerView cho ExperimentLogs, v.v. ở đây) -->
+        <TextView
+            android:id="@+id/text_view_experiment_logs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Đang tải nhật ký..." />
+
+    </LinearLayout>
+</ScrollView>
