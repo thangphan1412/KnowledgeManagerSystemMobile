@@ -8,21 +8,21 @@
 
     <item
         android:id="@+id/navigation_equipment"
-        android:icon="@drawable/baseline_equipment_24"
+        android:icon="@drawable/ic_equipment"
         android:title="Equipment" />
 
     <item
         android:id="@+id/navigation_inventory"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/ic_inventory"
         android:title="Inventory" />
 
     <item
         android:id="@+id/navigation_experiment"
-        android:icon="@drawable/baseline_equipment_24"
+        android:icon="@drawable/ic_experiment"
         android:title="Experiment" />
 
     <item
         android:id="@+id/navigation_sops"
-        android:icon="@drawable/baseline_equipment_24"
+        android:icon="@drawable/ic_sops"
         android:title="SOPs" />
 </menu>
