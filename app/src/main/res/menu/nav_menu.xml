@@ -13,31 +13,31 @@
         <!-- NÚT BẠN CẦN ĐÂY -->
         <item
             android:id="@+id/nav_team"
-            android:icon="@drawable/baseline_equipment_24"
+            android:icon="@drawable/ic_manager"
             android:title="Manage team" />
         <item
             android:id="@+id/nav_protocols"
-            android:icon="@drawable/baseline_equipment_24"
+            android:icon="@drawable/ic_approval"
             android:title="Approve protocols" />
 
         <item
             android:id="@+id/nav_sds"
-            android:icon="@drawable/baseline_equipment_24"
+            android:icon="@drawable/ic_sds_lookup"
             android:title="Safety data sheet (SDS) lookup" />
 
         <item
             android:id="@+id/nav_setting"
-            android:icon="@drawable/baseline_home_24"
+            android:icon="@drawable/ic_help"
             android:title="Help/Support" />
 
         <item
             android:id="@+id/nav_app"
-            android:icon="@drawable/baseline_equipment_24"
+            android:icon="@drawable/ic_about_app"
             android:title="About app" />
 
         <item
             android:id="@+id/nav_Logout"
-            android:icon="@drawable/baseline_equipment_24"
+            android:icon="@drawable/ic_logout"
             android:title="Logout" />
     </group>
 </menu>
